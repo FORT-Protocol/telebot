@@ -4,10 +4,15 @@
 
 ## Install
 
-```npm i @fort-protocol/telebot```
+```shell
+npm i @fort-protocol/telebot
+```
+or use yarn
+```shell
+yarn add @fort-protocol/telebot
+```
 
 ## Usage
-
 
 
 
