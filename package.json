@@ -1,0 +1,29 @@
+{
+  "name": "@fort-protocol/telebot",
+  "version": "1.0.0",
+  "description": "A program for telegram bot.",
+  "main": "index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "start": "src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/FORT-Protocol/telebot.git"
+  },
+  "keywords": [
+    "telegram"
+  ],
+  "author": "FORT Protocol",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FORT-Protocol/telebot/issues"
+  },
+  "homepage": "https://github.com/FORT-Protocol/telebot#readme",
+  "bin": {
+    "telebot": "src/index.js"
+  }
+}
