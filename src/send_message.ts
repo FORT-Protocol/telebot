@@ -1,4 +1,5 @@
-export const send_message = (text: string, chat_ids: string[]) => {
+export const send_message = (token:string, text: string, chat_ids: string[]) => {
+    console.log(token)
     console.log(text)
     console.log(chat_ids)
 }

@@ -1,7 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.mess_send_video = exports.send_video = void 0;
-const send_video = (video, chat_ids, caption) => {
+const send_video = (token, video, chat_ids, caption) => {
+    console.log(token);
     console.log(video);
     console.log(caption);
     console.log(chat_ids);

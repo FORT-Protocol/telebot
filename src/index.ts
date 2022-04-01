@@ -11,7 +11,7 @@ const program = new Command()
 program
     .name('telebot')
     .version('1.0.0')
-    .option('-T, --token', 'telegram bot token')
+    .option('-T, --token [token]', 'telegram bot token')
 
 // send-message
 program
@@ -21,7 +21,7 @@ program
     .option('--file <file>', 'chat_ids file')
     .action((text, chat_ids, options) => {
         if (chat_ids.length > 0) {
-            send_message(text, chat_ids)
+            send_message(options.token, text, chat_ids)
         } else if (options.file) {
             mess_send_message()
         } else {
@@ -50,7 +50,7 @@ program
     .description('send video to chat_id user')
     .action((video, chat_ids, options) => {
         if (chat_ids.length > 0) {
-            send_video(video, chat_ids, options.caption)
+            send_video(options.token, video, chat_ids, options.caption)
         } else if (options.file) {
             mess_send_video()
         } else {
@@ -79,7 +79,7 @@ program
     .description('send photo to chat_id user')
     .action((photo, chat_ids, options) => {
         if (chat_ids.length > 0) {
-            send_photo(photo, chat_ids, options.caption)
+            send_photo(options.token, photo, chat_ids, options.caption)
         } else if (options.file) {
             mess_send_photo()
         } else {
