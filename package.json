@@ -25,5 +25,9 @@
   "homepage": "https://github.com/FORT-Protocol/telebot#readme",
   "bin": {
     "telebot": "src/index.js"
+  },
+  "dependencies": {
+    "chalk": "^5.0.1",
+    "commander": "^9.1.0"
   }
 }
