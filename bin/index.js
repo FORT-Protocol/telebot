@@ -29,7 +29,7 @@ program
         (0, send_message_1.mess_send_message)();
     }
     else {
-        console.log(chalk_1.default.red('no user to send'));
+        console.log(chalk_1.default.green('Send message over:'), chalk_1.default.red('0 user'));
     }
 })
     .addHelpText('after', `
@@ -53,7 +53,7 @@ program
         (0, send_video_1.mess_send_video)();
     }
     else {
-        console.log(chalk_1.default.red('no user to send'));
+        console.log(chalk_1.default.green('Send video over:'), chalk_1.default.red('0 user'));
     }
 })
     .addHelpText('after', `
@@ -77,7 +77,7 @@ program
         (0, send_photo_1.mess_send_photo)();
     }
     else {
-        console.log(chalk_1.default.red('no user to send'));
+        console.log(chalk_1.default.green('Send photo over:'), chalk_1.default.red('0 user'));
     }
 })
     .addHelpText('after', `
