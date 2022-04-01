@@ -1,7 +1,11 @@
 #! /usr/bin/env node
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const commander_1 = require("commander");
+const chalk_1 = __importDefault(require("chalk"));
 const send_message_1 = require("./send_message");
 const send_video_1 = require("./send_video");
 const send_photo_1 = require("./send_photo");
@@ -25,7 +29,7 @@ program
         (0, send_message_1.mess_send_message)();
     }
     else {
-        console.log('no user to send');
+        console.log(chalk_1.default.red('no user to send'));
     }
 })
     .addHelpText('after', `
@@ -49,7 +53,7 @@ program
         (0, send_video_1.mess_send_video)();
     }
     else {
-        console.log('no user to send');
+        console.log(chalk_1.default.red('no user to send'));
     }
 })
     .addHelpText('after', `
@@ -73,7 +77,7 @@ program
         (0, send_photo_1.mess_send_photo)();
     }
     else {
-        console.log('no user to send');
+        console.log(chalk_1.default.red('no user to send'));
     }
 })
     .addHelpText('after', `

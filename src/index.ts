@@ -1,6 +1,6 @@
 #! /usr/bin/env node
 import { Command } from 'commander'
-import { Chalk } from 'chalk'
+import Chalk from "chalk"
 import { mess_send_message, send_message } from './send_message'
 import { mess_send_video, send_video } from './send_video'
 import { mess_send_photo, send_photo } from './send_photo'
@@ -25,7 +25,7 @@ program
         } else if (options.file) {
             mess_send_message()
         } else {
-            console.log('no user to send')
+            console.log(Chalk.red('no user to send'))
         }
     })
     .addHelpText(
@@ -54,7 +54,7 @@ program
         } else if (options.file) {
             mess_send_video()
         } else {
-            console.log('no user to send')
+            console.log(Chalk.red('no user to send'))
         }
     })
     .addHelpText(
@@ -83,7 +83,7 @@ program
         } else if (options.file) {
             mess_send_photo()
         } else {
-            console.log('no user to send')
+            console.log(Chalk.red('no user to send'))
         }
     })
     .addHelpText(

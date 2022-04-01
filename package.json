@@ -30,7 +30,7 @@
         "telebot": "bin/index.js"
     },
     "dependencies": {
-        "chalk": "^5.0.1",
+        "chalk": "^4.0.0",
         "commander": "^9.1.0",
         "typescript": "^4.6.3"
     },
