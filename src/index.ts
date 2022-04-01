@@ -22,9 +22,9 @@ program
     })
     .addHelpText('after', `
 Examples:
-  $ telebot send-message "hello" chat_id1
-  $ telebot send-message "hello" chat_id1 chat_id2
-  $ telebot send-message "hello" --file "./chat_ids.csv"
+  $ telebot send-message 'hello' chat_id1
+  $ telebot send-message 'hello' chat_id1 chat_id2
+  $ telebot send-message 'hello' --file './chat_ids.csv'
   `)
 
 
@@ -43,9 +43,9 @@ program
     })
     .addHelpText('after', `
 Examples:
-  $ telebot send-video "uri" chat_id1
-  $ telebot send-video "uri" chat_id1 chat_id2 --caption "hello"
-  $ telebot send-video "uri" --caption "hello" --file "./chat_ids.csv"
+  $ telebot send-video 'uri' chat_id1
+  $ telebot send-video 'uri' chat_id1 chat_id2 --caption 'hello'
+  $ telebot send-video 'uri' --caption "hello" --file './chat_ids.csv'
   `)
 
 
@@ -64,9 +64,9 @@ program
     })
     .addHelpText('after', `
 Examples:
-  $ telebot send-photo "uri" chat_id1
-  $ telebot send-photo "uri" chat_id1 chat_id2 --caption "hello"
-  $ telebot send-photo "uri" --caption "hello" --file "./chat_ids.csv"
+  $ telebot send-photo 'uri' chat_id1
+  $ telebot send-photo 'uri' chat_id1 chat_id2 --caption 'hello'
+  $ telebot send-photo 'uri' --caption 'hello' --file './chat_ids.csv'
   `)
 
 

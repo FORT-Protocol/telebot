@@ -33,11 +33,11 @@ telebot -V
 only send a `message` to single chat_id
 
 ```shell
-telebot -T "bot-token" sm "hello" chat_id
+telebot -T bot_token sm 'hello' chat_id
 ```
 
 if you want to send `message` to chat_ids which save in a csv file
 
 ```shell
-telebot -T "bot-token" sm "hello" --file /path/file.csv
+telebot -T bot_token sm 'hello' --file '/path/file.csv'
 ```
