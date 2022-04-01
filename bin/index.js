@@ -14,11 +14,10 @@ commander_1.program
     .option('-t, --text <text>', 'text')
     .option('-c, --text <caption>', 'caption')
     .option('-p, --photo <photo>', 'photo uri or photo id')
-    .option('-v, --video <video>', 'video uri or video id')
-    .option('-m, --mess', 'mess send mode');
+    .option('-v, --video <video>', 'video uri or video id');
 // command: send
 commander_1.program
-    .command('send [chat_id]')
+    .command('send [chat_id]', 'send message to named chat_id, or all if no chat_id supplied')
     .description('send message or photo or video')
     .action((chat_id) => {
     const options = commander_1.program.opts();
@@ -27,8 +26,16 @@ commander_1.program
     console.log(`send video: ${options.video}`);
     console.log(`send photo: ${options.photo}`);
     console.log(`send mode: ${options.mode}`);
+    console.log(`send caption: ${options.caption}`);
     console.log(`to user: ${chat_id}`);
 });
+// custom help
+commander_1.program
+    .addHelpText('after', `
+Example call:
+  $ telebot -T <token> send -t "hello world" 28390273
+  $ telebot -T <token> send -v "https://xxoo.avi" -f chat_ids.csv
+`);
 commander_1.program
     .parse();
 //# sourceMappingURL=index.js.map

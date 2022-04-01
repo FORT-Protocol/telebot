@@ -27,8 +27,18 @@ program
         console.log(`send video: ${options.video}`)
         console.log(`send photo: ${options.photo}`)
         console.log(`send mode: ${options.mode}`)
+        console.log(`send caption: ${options.caption}`)
         console.log(`to user: ${chat_id}`)
     })
+
+
+// custom help
+program
+    .addHelpText('after', `
+Example call:
+  $ telebot -T <token> send -t "hello world" 28390273
+  $ telebot -T <token> send -v "https://xxoo.avi" -f chat_ids.csv
+`);
 
 
 program
