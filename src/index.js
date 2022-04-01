@@ -9,7 +9,7 @@ program
 
 // options
 program
-    .option('-m --mode [mode]', 'send message mode, mess or single')
+    .option('-m --mode [mode]', 'send message mode, mess or single', 'single')
     .option('-t, --token [token]', `telegram bot's token`)
 
 
@@ -20,7 +20,8 @@ program
     .action((text, chat_id) => {
         const options = program.opts();
         console.log(`bot token: ${options.token}`)
-        console.log(`sendMessage: ${text}`)
+        console.log(`send message: ${text}`)
+        console.log(`send mode: ${options.mode}`)
         console.log(`to user: ${chat_id}`)
     })
 
@@ -30,7 +31,8 @@ program
     .action((video, chat_id) => {
         const options = program.opts();
         console.log(`bot token: ${options.token}`)
-        console.log(`sendVideo: ${video}`)
+        console.log(`send video: ${video}`)
+        console.log(`send mode: ${options.mode}`)
         console.log(`to user: ${chat_id}`)
     })
 
@@ -40,7 +42,8 @@ program
     .action((photo, chat_id) => {
         const options = program.opts();
         console.log(`bot token: ${options.token}`)
-        console.log(`sendVideo: ${photo}`)
+        console.log(`send video: ${photo}`)
+        console.log(`send mode: ${options.mode}`)
         console.log(`to user: ${chat_id}`)
     })
 
