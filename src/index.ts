@@ -15,11 +15,10 @@ program
     .option('-c, --text <caption>', 'caption')
     .option('-p, --photo <photo>', 'photo uri or photo id')
     .option('-v, --video <video>', 'video uri or video id')
-    .option('-m, --mess', 'mess send mode')
 
 // command: send
 program
-    .command('send [chat_id]')
+    .command('send [chat_id]', 'send message to named chat_id, or all if no chat_id supplied')
     .description('send message or photo or video')
     .action((chat_id: string) => {
         const options = program.opts();

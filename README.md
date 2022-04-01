@@ -39,5 +39,5 @@ telebot -T <token> sendMessage -t <text> [chat_id]
 if you want to send message to chat_ids which save in a csv file.
 
 ```shell
-telebot -T <token> sendMessage -t <text> -m -f /path/file.csv
+telebot -T <token> sendMessage -t <text> -f /path/file.csv
 ```
