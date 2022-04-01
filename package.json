@@ -21,7 +21,7 @@
         "telegram"
     ],
     "author": "FORT Protocol",
-    "license": "ISC",
+    "license": "MIT",
     "bugs": {
         "url": "https://github.com/FORT-Protocol/telebot/issues"
     },
