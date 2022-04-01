@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.mess_send_video = exports.send_video = void 0;
+exports.send_video = void 0;
 const inquirer_1 = __importDefault(require("inquirer"));
 const send_video = (token, video, chat_ids, caption) => __awaiter(void 0, void 0, void 0, function* () {
     const questions = [
@@ -35,6 +35,5 @@ const send_video = (token, video, chat_ids, caption) => __awaiter(void 0, void 0
     console.log(chat_ids);
 });
 exports.send_video = send_video;
-const mess_send_video = () => { };
-exports.mess_send_video = mess_send_video;
+exports.default = exports.send_video;
 //# sourceMappingURL=send_video.js.map

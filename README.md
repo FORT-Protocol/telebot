@@ -30,14 +30,24 @@ telebot -V
 
 ## send-message
 
-only send a `message` to single chat_id
+send a `message`
 
 ```shell
-telebot -T bot_token sm 'hello' chat_id
+telebot send-message 'hello' chat_id1 chat_id2
 ```
 
-if you want to send `message` to chat_ids which save in a csv file
+## send-photo
+
+send a `photo`
 
 ```shell
-telebot -T bot_token sm 'hello' --file '/path/file.csv'
+telebot send-photo 'uri' chat_id1 chat_id2 --caption 'hello'
+```
+
+## send-video
+
+send a `video`
+
+```shell
+telebot send-video 'uri' chat_id1 chat_id2 --caption 'hello'
 ```

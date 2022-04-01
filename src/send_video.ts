@@ -26,4 +26,4 @@ export const send_video = async (
     console.log(chat_ids)
 }
 
-export const mess_send_video = () => {}
+export default send_video

@@ -1,9 +1,9 @@
 #! /usr/bin/env node
-import { createCommand } from 'commander'
+import {createCommand} from 'commander'
 import Chalk from 'chalk'
-import { mess_send_message, send_message } from './send_message'
-import { mess_send_video, send_video } from './send_video'
-import { mess_send_photo, send_photo } from './send_photo'
+import send_message from './send_message'
+import send_video from './send_video'
+import send_photo from './send_photo'
 
 const telebot = createCommand()
 
@@ -18,13 +18,10 @@ telebot
     .command('send-message <text> [chat_ids...]')
     .alias('message')
     .description('send message to user')
-    .option('--file <file>', 'chat_ids file')
-    .action( async (text, chat_ids, options) => {
+    .action(async (text, chat_ids, options) => {
         const token = telebot.getOptionValue('token')
         if (chat_ids.length > 0) {
             await send_message(token, text, chat_ids)
-        } else if (options.file) {
-            mess_send_message()
         } else {
             console.log(Chalk.green('Send message over:'), Chalk.red('0 user'))
         }
@@ -33,9 +30,7 @@ telebot
         'after',
         `
 Examples:
-  $ telebot send-message 'hello' chat_id1
   $ telebot send-message 'hello' chat_id1 chat_id2
-  $ telebot send-message 'hello' --file './chat_ids.csv'
   `
     )
 
@@ -47,14 +42,11 @@ telebot
         '--caption <caption>',
         'video caption (may also be used when resending videos by file_id), 0-1024 characters after entities parsing'
     )
-    .option('--file <file>', 'chat_ids file')
     .description('send video to chat_id user')
-    .action((video, chat_ids, options) => {
+    .action(async (video, chat_ids, options) => {
         const token = telebot.getOptionValue('token')
         if (chat_ids.length > 0) {
-            send_video(token, video, chat_ids, options.caption)
-        } else if (options.file) {
-            mess_send_video()
+           await send_video(token, video, chat_ids, options.caption)
         } else {
             console.log(Chalk.green('Send video over:'), Chalk.red('0 user'))
         }
@@ -63,9 +55,7 @@ telebot
         'after',
         `
 Examples:
-  $ telebot send-video 'uri' chat_id1
   $ telebot send-video 'uri' chat_id1 chat_id2 --caption 'hello'
-  $ telebot send-video 'uri' --caption "hello" --file './chat_ids.csv'
   `
     )
 
@@ -79,12 +69,10 @@ telebot
     )
     .option('--file <file>', 'chat_ids file')
     .description('send photo to chat_id user')
-    .action((photo, chat_ids, options) => {
+    .action(async (photo, chat_ids, options) => {
         const token = telebot.getOptionValue('token')
         if (chat_ids.length > 0) {
-            send_photo(token, photo, chat_ids, options.caption)
-        } else if (options.file) {
-            mess_send_photo()
+            await send_photo(token, photo, chat_ids, options.caption)
         } else {
             console.log(Chalk.green('Send photo over:'), Chalk.red('0 user'))
         }
@@ -93,9 +81,7 @@ telebot
         'after',
         `
 Examples:
-  $ telebot send-photo 'uri' chat_id1
   $ telebot send-photo 'uri' chat_id1 chat_id2 --caption 'hello'
-  $ telebot send-photo 'uri' --caption 'hello' --file './chat_ids.csv'
   `
     )
 

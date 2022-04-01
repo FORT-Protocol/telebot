@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.mess_send_photo = exports.send_photo = void 0;
+exports.send_photo = void 0;
 const inquirer_1 = __importDefault(require("inquirer"));
 const send_photo = (token, photo, chat_ids, caption) => __awaiter(void 0, void 0, void 0, function* () {
     const questions = [
@@ -35,6 +35,5 @@ const send_photo = (token, photo, chat_ids, caption) => __awaiter(void 0, void 0
     console.log(chat_ids);
 });
 exports.send_photo = send_photo;
-const mess_send_photo = () => { };
-exports.mess_send_photo = mess_send_photo;
+exports.default = exports.send_photo;
 //# sourceMappingURL=send_photo.js.map

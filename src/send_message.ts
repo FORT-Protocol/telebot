@@ -20,5 +20,4 @@ export const send_message = async (token: string, text: string, chat_ids: string
     console.log('chat_ids:', chat_ids)
 }
 
-export const mess_send_message = () => {
-}
+export default send_message

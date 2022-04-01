@@ -26,4 +26,4 @@ export const send_photo = async (
     console.log(chat_ids)
 }
 
-export const mess_send_photo = () => {}
+export default send_photo

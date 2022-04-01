@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.mess_send_message = exports.send_message = void 0;
+exports.send_message = void 0;
 const inquirer_1 = __importDefault(require("inquirer"));
 const send_message = (token, text, chat_ids) => __awaiter(void 0, void 0, void 0, function* () {
     const questions = [
@@ -34,7 +34,5 @@ const send_message = (token, text, chat_ids) => __awaiter(void 0, void 0, void 0
     console.log('chat_ids:', chat_ids);
 });
 exports.send_message = send_message;
-const mess_send_message = () => {
-};
-exports.mess_send_message = mess_send_message;
+exports.default = exports.send_message;
 //# sourceMappingURL=send_message.js.map
