@@ -37,9 +37,9 @@ program
     .description('send video to chat_id user')
     .action((video, chat_id, options) => {
         console.log(`video: ${video}`)
+        console.log(`users: ${chat_id}`)
         console.log(`caption: ${options.caption}`)
         console.log(`file: ${options.file}`)
-        console.log(`users: ${chat_id}`)
     })
     .addHelpText('after', `
 Examples:
@@ -56,11 +56,11 @@ program
     .option('--caption <caption>', 'send caption')
     .option('--file <file>', 'chat_ids file')
     .description('send photo to chat_id user')
-    .action((chat_id, options) => {
-        console.log(`photo: ${options.photo}`)
+    .action((photo, chat_id, options) => {
+        console.log(`photo: ${photo}`)
+        console.log(`user: ${chat_id}`)
         console.log(`caption: ${options.caption}`)
         console.log(`file: ${options.file}`)
-        console.log(`user: ${chat_id}`)
     })
     .addHelpText('after', `
 Examples:
