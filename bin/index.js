@@ -2,40 +2,66 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const commander_1 = require("commander");
-// name, description, version
-commander_1.program
+const program = new commander_1.Command();
+// name, version, global-option
+program
     .name('telebot')
-    .description('A program for telegram bot.')
-    .version('1.0.0');
-// options
-commander_1.program
-    .option('-T, --token <token>', `telegram bot's token`)
-    .option('-f, --file <file>', 'file path')
-    .option('-t, --text <text>', 'text')
-    .option('-c, --text <caption>', 'caption')
-    .option('-p, --photo <photo>', 'photo uri or photo id')
-    .option('-v, --video <video>', 'video uri or video id');
-// command: send
-commander_1.program
-    .command('send [chat_id]', 'send message to named chat_id, or all if no chat_id supplied')
-    .description('send message or photo or video')
-    .action((chat_id) => {
-    const options = commander_1.program.opts();
-    console.log(`bot: ${options.token}`);
-    console.log(`send message: ${options.text}`);
-    console.log(`send video: ${options.video}`);
-    console.log(`send photo: ${options.photo}`);
-    console.log(`send mode: ${options.mode}`);
-    console.log(`send caption: ${options.caption}`);
-    console.log(`to user: ${chat_id}`);
-});
-// custom help
-commander_1.program
+    .version('1.0.0')
+    .option('-T, --token', 'telegram bot token');
+// send-message
+program
+    .command('send-message [chat_id...]')
+    .alias('sm')
+    .description('send message to user')
+    .option('--text <text>', 'send text')
+    .option('--file <file>', 'chat_ids file')
+    .action((chat_id, options) => {
+    console.log(`text: ${options.text}`);
+    console.log(`file: ${options.file}`);
+    console.log(`user: ${chat_id}`);
+})
     .addHelpText('after', `
-Example call:
-  $ telebot -T <token> send -t "hello world" 28390273
-  $ telebot -T <token> send -v "https://xxoo.avi" -f chat_ids.csv
-`);
-commander_1.program
-    .parse();
+Examples:
+  $ telebot send-message chat_id1 --text hello
+  $ telebot send-message chat_id1 chat_id2 --text hello
+  `);
+// send-video
+program
+    .command('send-video [chat_id...]')
+    .alias('sv')
+    .option('--video <video>', 'send video uri')
+    .option('--caption <caption>', 'send caption')
+    .option('--file <file>', 'chat_ids file')
+    .description('send video to chat_id user')
+    .action((chat_id, options) => {
+    console.log(`video: ${options.video}`);
+    console.log(`caption: ${options.caption}`);
+    console.log(`file: ${options.file}`);
+    console.log(`user: ${chat_id}`);
+})
+    .addHelpText('after', `
+Examples:
+  $ telebot send-video chat_id1 --video hello
+  $ telebot send-video chat_id1 chat_id2 --video "https://xxoo.mp4" --caption hello
+  `);
+// send-photo
+program
+    .command('send-photo [chat_id...]')
+    .alias('sp')
+    .option('--photo <photo>', 'send photo uri')
+    .option('--caption <caption>', 'send caption')
+    .option('--file <file>', 'chat_ids file')
+    .description('send photo to chat_id user')
+    .action((chat_id, options) => {
+    console.log(`photo: ${options.photo}`);
+    console.log(`caption: ${options.caption}`);
+    console.log(`file: ${options.file}`);
+    console.log(`user: ${chat_id}`);
+})
+    .addHelpText('after', `
+Examples:
+  $ telebot send-photo chat_id1 --photo "https://xxoo.jpg"
+  $ telebot send-photo chat_id1 chat_id2 --photo "https://xxoo.jpg" --caption hello
+  `);
+program.parse(process.argv);
 //# sourceMappingURL=index.js.map

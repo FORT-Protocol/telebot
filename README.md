@@ -28,28 +28,16 @@ get version of telebot
 telebot -V
 ```
 
-## send
+## send-message
 
 only send a `message` to single chat_id
 
 ```shell
-telebot -T <token> send -t text chat_id
+telebot -T "bot-token" send-message chat_id -t "hello"
 ```
 
 if you want to send `message` to chat_ids which save in a csv file
 
 ```shell
-telebot -T <token> send -t text -f /path/file.csv
-```
-
-if you want to send `video` to single chat_id
-
-```shell
-telebot -T <token> send -v video_uri chat_id
-```
-
-if you want to send `photo` to single chat_id
-
-```shell
-telebot -T <token> send -p photo_uri chat_id
+telebot -T "bot-token" send-message -f /path/file.csv -t "hello"
 ```

@@ -9,8 +9,8 @@
   "scripts": {
     "build": "tsc",
     "start": "tsc --watch",
-    "publish": "tsc && yarn publish",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint . --ext .ts",
+    "dev": "bin/index.js"
   },
   "repository": {
     "type": "git",
