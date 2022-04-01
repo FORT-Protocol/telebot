@@ -1,5 +1,5 @@
 #! /usr/bin/env node
-const { program } = require('commander');
+import {program} from "commander";
 
 // name, description, version
 program
@@ -21,7 +21,7 @@ program
 program
     .command('send [chat_id]')
     .description('send message or photo or video')
-    .action((chat_id) => {
+    .action((chat_id: string) => {
         const options = program.opts();
         console.log(`bot: ${options.token}`)
         console.log(`send message: ${options.text}`)
