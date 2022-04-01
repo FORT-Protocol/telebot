@@ -1,42 +1,44 @@
 {
-  "name": "@fort-protocol/telebot",
-  "version": "1.0.0",
-  "description": "A program for telegram bot.",
-  "main": "index.js",
-  "publishConfig": {
-    "access": "public"
-  },
-  "scripts": {
-    "build": "tsc",
-    "start": "tsc --watch",
-    "lint": "eslint . --ext .ts",
-    "dev": "bin/index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/FORT-Protocol/telebot.git"
-  },
-  "keywords": [
-    "telegram"
-  ],
-  "author": "FORT Protocol",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/FORT-Protocol/telebot/issues"
-  },
-  "homepage": "https://github.com/FORT-Protocol/telebot#readme",
-  "bin": {
-    "telebot": "bin/index.js"
-  },
-  "dependencies": {
-    "chalk": "^5.0.1",
-    "commander": "^9.1.0",
-    "typescript": "^4.6.3"
-  },
-  "devDependencies": {
-    "@types/node": "^17.0.23",
-    "@typescript-eslint/eslint-plugin": "^5.17.0",
-    "@typescript-eslint/parser": "^5.17.0",
-    "eslint": "^8.12.0"
-  }
+    "name": "@fort-protocol/telebot",
+    "version": "1.0.0",
+    "description": "A program for telegram bot.",
+    "main": "index.js",
+    "publishConfig": {
+        "access": "public"
+    },
+    "scripts": {
+        "build": "tsc",
+        "start": "tsc --watch",
+        "lint": "eslint . --ext .ts",
+        "dev": "bin/index.js",
+        "format": "prettier --write ."
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+ssh://git@github.com/FORT-Protocol/telebot.git"
+    },
+    "keywords": [
+        "telegram"
+    ],
+    "author": "FORT Protocol",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/FORT-Protocol/telebot/issues"
+    },
+    "homepage": "https://github.com/FORT-Protocol/telebot#readme",
+    "bin": {
+        "telebot": "bin/index.js"
+    },
+    "dependencies": {
+        "chalk": "^5.0.1",
+        "commander": "^9.1.0",
+        "typescript": "^4.6.3"
+    },
+    "devDependencies": {
+        "@types/node": "^17.0.23",
+        "@typescript-eslint/eslint-plugin": "^5.17.0",
+        "@typescript-eslint/parser": "^5.17.0",
+        "eslint": "^8.12.0",
+        "prettier": "2.6.1"
+    }
 }
