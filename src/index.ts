@@ -11,49 +11,48 @@ program
 
 // send-message
 program
-    .command('send-message [chat_id...]')
+    .command('send-message <text> [chat_id...]')
     .alias('sm')
     .description('send message to user')
-    .option('--text <text>', 'send text')
     .option('--file <file>', 'chat_ids file')
-    .action((chat_id, options) => {
-        console.log(`text: ${options.text}`)
+    .action((text, chat_id, options) => {
+        console.log(`text: ${text}`)
+        console.log(`users: ${chat_id}`)
         console.log(`file: ${options.file}`)
-        console.log(`user: ${chat_id}`)
     })
     .addHelpText('after', `
 Examples:
-  $ telebot send-message chat_id1 --text hello
-  $ telebot send-message chat_id1 chat_id2 --text hello
+  $ telebot send-message "hello" chat_id1
+  $ telebot send-message "hello" chat_id1 chat_id2
+  $ telebot send-message "hello" --file "./chat_ids.csv"
   `)
 
 
 // send-video
 program
-    .command('send-video [chat_id...]')
+    .command('send-video <video> [chat_id...]')
     .alias('sv')
-    .option('--video <video>', 'send video uri')
     .option('--caption <caption>', 'send caption')
     .option('--file <file>', 'chat_ids file')
     .description('send video to chat_id user')
-    .action((chat_id, options) => {
-        console.log(`video: ${options.video}`)
+    .action((video, chat_id, options) => {
+        console.log(`video: ${video}`)
         console.log(`caption: ${options.caption}`)
         console.log(`file: ${options.file}`)
-        console.log(`user: ${chat_id}`)
+        console.log(`users: ${chat_id}`)
     })
     .addHelpText('after', `
 Examples:
-  $ telebot send-video chat_id1 --video hello
-  $ telebot send-video chat_id1 chat_id2 --video "https://xxoo.mp4" --caption hello
+  $ telebot send-video "uri" chat_id1
+  $ telebot send-video "uri" chat_id1 chat_id2 --caption "hello"
+  $ telebot send-video "uri" --caption "hello" --file "./chat_ids.csv"
   `)
 
 
 // send-photo
 program
-    .command('send-photo [chat_id...]')
+    .command('send-photo <photo> [chat_id...]')
     .alias('sp')
-    .option('--photo <photo>', 'send photo uri')
     .option('--caption <caption>', 'send caption')
     .option('--file <file>', 'chat_ids file')
     .description('send photo to chat_id user')
@@ -65,8 +64,9 @@ program
     })
     .addHelpText('after', `
 Examples:
-  $ telebot send-photo chat_id1 --photo "https://xxoo.jpg"
-  $ telebot send-photo chat_id1 chat_id2 --photo "https://xxoo.jpg" --caption hello
+  $ telebot send-photo "uri" chat_id1
+  $ telebot send-photo "uri" chat_id1 chat_id2 --caption "hello"
+  $ telebot send-photo "uri" --caption "hello" --file "./chat_ids.csv"
   `)
 
 
