@@ -19,9 +19,10 @@ telebot
     .alias('message')
     .description('send message to user')
     .option('--file <file>', 'chat_ids file')
-    .action((text, chat_ids, options) => {
+    .action( async (text, chat_ids, options) => {
+        const token = telebot.getOptionValue('token')
         if (chat_ids.length > 0) {
-            send_message(options.token, text, chat_ids)
+            await send_message(token, text, chat_ids)
         } else if (options.file) {
             mess_send_message()
         } else {
@@ -49,8 +50,9 @@ telebot
     .option('--file <file>', 'chat_ids file')
     .description('send video to chat_id user')
     .action((video, chat_ids, options) => {
+        const token = telebot.getOptionValue('token')
         if (chat_ids.length > 0) {
-            send_video(options.token, video, chat_ids, options.caption)
+            send_video(token, video, chat_ids, options.caption)
         } else if (options.file) {
             mess_send_video()
         } else {
@@ -78,8 +80,9 @@ telebot
     .option('--file <file>', 'chat_ids file')
     .description('send photo to chat_id user')
     .action((photo, chat_ids, options) => {
+        const token = telebot.getOptionValue('token')
         if (chat_ids.length > 0) {
-            send_photo(options.token, photo, chat_ids, options.caption)
+            send_photo(token, photo, chat_ids, options.caption)
         } else if (options.file) {
             mess_send_photo()
         } else {

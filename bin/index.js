@@ -1,5 +1,14 @@
 #! /usr/bin/env node
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -21,9 +30,10 @@ telebot
     .alias('message')
     .description('send message to user')
     .option('--file <file>', 'chat_ids file')
-    .action((text, chat_ids, options) => {
+    .action((text, chat_ids, options) => __awaiter(void 0, void 0, void 0, function* () {
+    const token = telebot.getOptionValue('token');
     if (chat_ids.length > 0) {
-        (0, send_message_1.send_message)(options.token, text, chat_ids);
+        yield (0, send_message_1.send_message)(token, text, chat_ids);
     }
     else if (options.file) {
         (0, send_message_1.mess_send_message)();
@@ -31,7 +41,7 @@ telebot
     else {
         console.log(chalk_1.default.green('Send message over:'), chalk_1.default.red('0 user'));
     }
-})
+}))
     .addHelpText('after', `
 Examples:
   $ telebot send-message 'hello' chat_id1
@@ -46,8 +56,9 @@ telebot
     .option('--file <file>', 'chat_ids file')
     .description('send video to chat_id user')
     .action((video, chat_ids, options) => {
+    const token = telebot.getOptionValue('token');
     if (chat_ids.length > 0) {
-        (0, send_video_1.send_video)(options.token, video, chat_ids, options.caption);
+        (0, send_video_1.send_video)(token, video, chat_ids, options.caption);
     }
     else if (options.file) {
         (0, send_video_1.mess_send_video)();
@@ -70,8 +81,9 @@ telebot
     .option('--file <file>', 'chat_ids file')
     .description('send photo to chat_id user')
     .action((photo, chat_ids, options) => {
+    const token = telebot.getOptionValue('token');
     if (chat_ids.length > 0) {
-        (0, send_photo_1.send_photo)(options.token, photo, chat_ids, options.caption);
+        (0, send_photo_1.send_photo)(token, photo, chat_ids, options.caption);
     }
     else if (options.file) {
         (0, send_photo_1.mess_send_photo)();
