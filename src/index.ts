@@ -12,7 +12,7 @@ program
 // send-message
 program
     .command('send-message <text> [chat_id...]')
-    .alias('sm')
+    .alias('message')
     .description('send message to user')
     .option('--file <file>', 'chat_ids file')
     .action((text, chat_id, options) => {
@@ -31,8 +31,8 @@ Examples:
 // send-video
 program
     .command('send-video <video> [chat_id...]')
-    .alias('sv')
-    .option('--caption <caption>', 'send caption')
+    .alias('video')
+    .option('--caption <caption>', 'video caption (may also be used when resending videos by file_id), 0-1024 characters after entities parsing')
     .option('--file <file>', 'chat_ids file')
     .description('send video to chat_id user')
     .action((video, chat_id, options) => {
@@ -52,8 +52,8 @@ Examples:
 // send-photo
 program
     .command('send-photo <photo> [chat_id...]')
-    .alias('sp')
-    .option('--caption <caption>', 'send caption')
+    .alias('photo')
+    .option('--caption <caption>', 'photo caption (may also be used when resending photos by file_id), 0-1024 characters after entities parsing')
     .option('--file <file>', 'chat_ids file')
     .description('send photo to chat_id user')
     .action((photo, chat_id, options) => {
