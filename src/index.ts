@@ -1,20 +1,20 @@
 #! /usr/bin/env node
-import { Command } from 'commander'
+import { createCommand } from 'commander'
 import Chalk from 'chalk'
 import { mess_send_message, send_message } from './send_message'
 import { mess_send_video, send_video } from './send_video'
 import { mess_send_photo, send_photo } from './send_photo'
 
-const program = new Command()
+const telebot = createCommand()
 
 // name, version, global-option
-program
+telebot
     .name('telebot')
     .version('1.0.0')
     .option('-T, --token [token]', 'telegram bot token')
 
 // send-message
-program
+telebot
     .command('send-message <text> [chat_ids...]')
     .alias('message')
     .description('send message to user')
@@ -39,7 +39,7 @@ Examples:
     )
 
 // send-video
-program
+telebot
     .command('send-video <video> [chat_ids...]')
     .alias('video')
     .option(
@@ -68,7 +68,7 @@ Examples:
     )
 
 // send-photo
-program
+telebot
     .command('send-photo <photo> [chat_ids...]')
     .alias('photo')
     .option(
@@ -96,4 +96,4 @@ Examples:
   `
     )
 
-program.parse(process.argv)
+telebot.parse(process.argv)

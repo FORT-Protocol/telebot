@@ -9,14 +9,14 @@ const chalk_1 = __importDefault(require("chalk"));
 const send_message_1 = require("./send_message");
 const send_video_1 = require("./send_video");
 const send_photo_1 = require("./send_photo");
-const program = new commander_1.Command();
+const telebot = (0, commander_1.createCommand)();
 // name, version, global-option
-program
+telebot
     .name('telebot')
     .version('1.0.0')
     .option('-T, --token [token]', 'telegram bot token');
 // send-message
-program
+telebot
     .command('send-message <text> [chat_ids...]')
     .alias('message')
     .description('send message to user')
@@ -39,7 +39,7 @@ Examples:
   $ telebot send-message 'hello' --file './chat_ids.csv'
   `);
 // send-video
-program
+telebot
     .command('send-video <video> [chat_ids...]')
     .alias('video')
     .option('--caption <caption>', 'video caption (may also be used when resending videos by file_id), 0-1024 characters after entities parsing')
@@ -63,7 +63,7 @@ Examples:
   $ telebot send-video 'uri' --caption "hello" --file './chat_ids.csv'
   `);
 // send-photo
-program
+telebot
     .command('send-photo <photo> [chat_ids...]')
     .alias('photo')
     .option('--caption <caption>', 'photo caption (may also be used when resending photos by file_id), 0-1024 characters after entities parsing')
@@ -86,5 +86,5 @@ Examples:
   $ telebot send-photo 'uri' chat_id1 chat_id2 --caption 'hello'
   $ telebot send-photo 'uri' --caption 'hello' --file './chat_ids.csv'
   `);
-program.parse(process.argv);
+telebot.parse(process.argv);
 //# sourceMappingURL=index.js.map
