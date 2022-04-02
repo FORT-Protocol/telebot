@@ -1,6 +1,6 @@
 {
     "name": "@fort-protocol/telebot",
-    "version": "1.0.0",
+    "version": "0.1.0",
     "description": "A program for telegram bot.",
     "main": "dist/index.js",
     "publishConfig": {

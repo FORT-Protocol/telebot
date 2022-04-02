@@ -5,13 +5,13 @@
 ## Install
 
 ```shell
-npm i @fort-protocol/telebot
+npm i -g @fort-protocol/telebot
 ```
 
 or
 
 ```shell
-yarn add @fort-protocol/telebot
+yarn global add @fort-protocol/telebot
 ```
 
 ## Help
