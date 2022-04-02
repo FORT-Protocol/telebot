@@ -27,7 +27,8 @@
     },
     "homepage": "https://github.com/FORT-Protocol/telebot#readme",
     "bin": {
-        "telebot": "dist/index.js"
+        "telebot": "dist/index.js",
+        "tb": "dist/index.js"
     },
     "dependencies": {
         "@types/inquirer": "^8.2.1",
