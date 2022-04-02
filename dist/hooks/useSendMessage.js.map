@@ -1,1 +1,0 @@
-{"version":3,"file":"useSendMessage.js","sourceRoot":"","sources":["../../src/hooks/useSendMessage.ts"],"names":[],"mappings":";;;;;;;;;;;;AAAO,MAAM,cAAc,GAAG,CAAO,KAAa,EAAE,IAAY,EAAE,OAAe,EAAE,EAAE;IACjF,OAAO,CAAC,GAAG,CAAC,KAAK,EAAE,IAAI,EAAE,OAAO,CAAC,CAAA;AACrC,CAAC,CAAA,CAAA;AAFY,QAAA,cAAc,kBAE1B;AAED,kBAAe,sBAAc,CAAA"}
