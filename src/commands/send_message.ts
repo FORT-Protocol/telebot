@@ -15,7 +15,7 @@ export const send_message = async (
         },
         {
             type: 'confirm',
-            name: 'confirm',
+            name: 'confirmed',
             message: 'Is now to send message?',
             default: true,
             when: !confirmed
@@ -26,7 +26,7 @@ export const send_message = async (
     if (!token){
         token = answers.token
     }
-    if (answers.confirm || confirmed) {
+    if (confirmed || answers.confirmed) {
         console.log('token:', token)
         console.log('text:', text)
         console.log('chat_ids:', chat_ids)

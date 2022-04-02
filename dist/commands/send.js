@@ -54,16 +54,25 @@ const send = (token, confirmed) => __awaiter(void 0, void 0, void 0, function* (
             }
         },
         {
-            type: 'input',
-            name: 'caption',
-            message: 'Add caption:',
+            type: 'confirm',
+            name: 'hasCaption',
+            message: 'Add caption?',
+            default: true,
             when: (answers) => {
                 return answers.method === 'Photo' || answers.method === 'Video';
             }
         },
         {
+            type: 'editor',
+            name: 'caption',
+            message: 'input the caption:',
+            when: (answers) => {
+                return (answers.method === 'Photo' || answers.method === 'Video') && answers.hasCaption;
+            }
+        },
+        {
             type: 'confirm',
-            name: 'confirm',
+            name: 'confirmed',
             message: 'Is now to send message?',
             default: true,
             when: !confirmed
@@ -74,9 +83,23 @@ const send = (token, confirmed) => __awaiter(void 0, void 0, void 0, function* (
     if (!token) {
         token = answers.token;
     }
-    if (confirmed || answers.confirm) {
+    if (confirmed || answers.confirmed) {
         console.log(`token:${token}`);
-        console.log(`method:${answers.method}`);
+        switch (answers.method) {
+            case 'Message':
+                console.log('text:', answers.text);
+                break;
+            case 'Video':
+                console.log('video:', answers.video);
+                console.log('caption', answers.caption);
+                break;
+            case 'Photo':
+                console.log('photo:', answers.photo);
+                console.log('caption', answers.caption);
+                break;
+            default:
+                console.log('Error method!');
+        }
         return;
     }
     console.log('Cancel the job!');

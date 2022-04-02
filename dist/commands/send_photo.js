@@ -24,7 +24,7 @@ const send_photo = (token, photo, chat_ids, caption, confirmed) => __awaiter(voi
         },
         {
             type: 'confirm',
-            name: 'confirm',
+            name: 'confirmed',
             message: 'Is now to send message?',
             default: true,
             when: !confirmed
@@ -35,7 +35,7 @@ const send_photo = (token, photo, chat_ids, caption, confirmed) => __awaiter(voi
     if (!token) {
         token = answers.token;
     }
-    if (confirmed || answers.confirm) {
+    if (confirmed || answers.confirmed) {
         console.log(token);
         console.log(photo);
         console.log(caption);

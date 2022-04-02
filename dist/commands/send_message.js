@@ -24,7 +24,7 @@ const send_message = (token, text, chat_ids, confirmed) => __awaiter(void 0, voi
         },
         {
             type: 'confirm',
-            name: 'confirm',
+            name: 'confirmed',
             message: 'Is now to send message?',
             default: true,
             when: !confirmed
@@ -35,7 +35,7 @@ const send_message = (token, text, chat_ids, confirmed) => __awaiter(void 0, voi
     if (!token) {
         token = answers.token;
     }
-    if (answers.confirm || confirmed) {
+    if (confirmed || answers.confirmed) {
         console.log('token:', token);
         console.log('text:', text);
         console.log('chat_ids:', chat_ids);

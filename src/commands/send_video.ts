@@ -16,7 +16,7 @@ export const send_video = async (
         },
         {
             type: 'confirm',
-            name: 'confirm',
+            name: 'confirmed',
             message: 'Is now to send message?',
             default: true,
             when: !confirmed
@@ -27,7 +27,7 @@ export const send_video = async (
     if (!token){
         token = answers.token
     }
-    if (confirmed || answers.confirm) {
+    if (confirmed || answers.confirmed) {
         console.log(token)
         console.log(video)
         console.log(caption)
