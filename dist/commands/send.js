@@ -30,6 +30,38 @@ const send = (token, confirmed) => __awaiter(void 0, void 0, void 0, function* (
             default: 0
         },
         {
+            type: 'editor',
+            name: 'text',
+            message: 'Input the text to send:',
+            when: (answers) => {
+                return answers.method === 'Message';
+            }
+        },
+        {
+            type: 'input',
+            name: 'video',
+            message: 'Input the video uri:',
+            when: (answers) => {
+                return answers.method === 'Video';
+            }
+        },
+        {
+            type: 'input',
+            name: 'photo',
+            message: 'Input the photo uri:',
+            when: (answers) => {
+                return answers.method === 'Photo';
+            }
+        },
+        {
+            type: 'input',
+            name: 'caption',
+            message: 'Add caption:',
+            when: (answers) => {
+                return answers.method === 'Photo' || answers.method === 'Video';
+            }
+        },
+        {
             type: 'confirm',
             name: 'confirm',
             message: 'Is now to send message?',
@@ -37,7 +69,6 @@ const send = (token, confirmed) => __awaiter(void 0, void 0, void 0, function* (
             when: !confirmed
         },
     ];
-    console.log(confirmed);
     const q = yield inquirer_1.default.prompt(questions);
     const answers = yield q;
     if (!token) {
