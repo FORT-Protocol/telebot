@@ -1,5 +1,6 @@
 import inquirer from 'inquirer'
 import useSendVideo from "../hooks/useSendVideo";
+import Chalk from "chalk";
 
 export const send_video = async (
     token: string | undefined,
@@ -32,10 +33,14 @@ export const send_video = async (
         for (const index in chat_ids) {
             await useSendVideo(token!, video, caption, chat_ids[index])
                 .then(({ok, username}) => {
-                    console.log(`Process: ${Number(index + 1)}/${chat_ids.length}, ${username}, ${ok ? 'success' : 'error' }`)
+                    if (ok) {
+                        console.log(Chalk.green(`Total:${chat_ids.length}  No.${Number(index) + 1}  ${username}`))
+                    } else {
+                        console.log(Chalk.red(`Total:${chat_ids.length}  No.${Number(index) + 1}  ${username}`))
+                    }
                 })
         }
-        console.log('Over!')
+        console.log(Chalk.green('\nMission Completed!'))
         return
     }
     console.log('Cancel this send job!')

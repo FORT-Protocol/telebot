@@ -1,5 +1,6 @@
 import inquirer from 'inquirer'
 import useSendMessage from "../hooks/useSendMessage"
+import Chalk from "chalk";
 
 export const send_message = async (
     token: string | undefined,
@@ -29,12 +30,16 @@ export const send_message = async (
     }
     if (confirmed || answers.confirmed) {
         for (const index in chat_ids) {
-           await useSendMessage(token!, text, chat_ids[index])
+            await useSendMessage(token!, text, chat_ids[index])
                 .then(({ok, username}) => {
-                    console.log(`Process: ${Number(index + 1)}/${chat_ids.length}, ${username}, ${ok ? 'success' : 'error' }`)
+                    if (ok) {
+                        console.log(Chalk.green(`Total:${chat_ids.length}  No.${Number(index) + 1}  ${username}`))
+                    } else {
+                        console.log(Chalk.red(`Total:${chat_ids.length}  No.${Number(index) + 1}  ${username}`))
+                    }
                 })
         }
-        console.log('Over!')
+        console.log(Chalk.green('\nMission Completed!'))
         return
     }
     
