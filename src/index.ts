@@ -1,5 +1,5 @@
 #! /usr/bin/env node
-import {createCommand} from 'commander'
+import { createCommand } from 'commander'
 import Chalk from 'chalk'
 import send_message from './commands/send_message'
 import send_video from './commands/send_video'
