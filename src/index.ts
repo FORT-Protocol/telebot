@@ -81,7 +81,6 @@ telebot
         '--caption <caption>',
         'photo caption (may also be used when resending photos by file_id), 0-1024 characters after entities parsing'
     )
-    .option('--file <file>', 'chat_ids file')
     .description('send photo to chat_id user')
     .action(async (photo, chat_ids, options) => {
         const token = telebot.getOptionValue('token')
