@@ -8,9 +8,27 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.send = void 0;
-const send = () => __awaiter(void 0, void 0, void 0, function* () {
+const inquirer_1 = __importDefault(require("inquirer"));
+const send = (token) => __awaiter(void 0, void 0, void 0, function* () {
+    const questions = [
+        {
+            type: 'input',
+            message: 'bot token:',
+            name: 'token',
+            when: !token
+        },
+    ];
+    const q = yield inquirer_1.default.prompt(questions);
+    const answers = yield q;
+    if (!token) {
+        token = answers.token;
+    }
+    console.log(token);
     console.log('easy send mode');
 });
 exports.send = send;

@@ -28,7 +28,8 @@ telebot
     .command('send')
     .description('easy send via bot')
     .action(() => __awaiter(void 0, void 0, void 0, function* () {
-    yield (0, send_1.default)();
+    const token = telebot.getOptionValue('token');
+    yield (0, send_1.default)(token);
 }))
     .addHelpText('after', `
 Examples:

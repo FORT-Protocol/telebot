@@ -18,18 +18,17 @@ const send_message = (token, text, chat_ids) => __awaiter(void 0, void 0, void 0
     const questions = [
         {
             type: 'input',
-            message: 'Input bot token',
+            message: 'bot token:',
             name: 'token',
-            default: '',
+            when: !token
         },
     ];
-    let bot = token;
+    const q = yield inquirer_1.default.prompt(questions);
+    const answers = yield q;
     if (!token) {
-        const q = yield inquirer_1.default.prompt(questions);
-        const answers = yield q;
-        bot = answers.token;
+        token = answers.token;
     }
-    console.log('token:', bot);
+    console.log('token:', token);
     console.log('text:', text);
     console.log('chat_ids:', chat_ids);
 });

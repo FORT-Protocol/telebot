@@ -17,7 +17,8 @@ telebot
     .command('send')
     .description('easy send via bot')
     .action(async () => {
-        await send()
+        const token = telebot.getOptionValue('token')
+        await send(token)
     })
     .addHelpText(
         'after',

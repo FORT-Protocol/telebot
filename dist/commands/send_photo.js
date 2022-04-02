@@ -18,18 +18,17 @@ const send_photo = (token, photo, chat_ids, caption) => __awaiter(void 0, void 0
     const questions = [
         {
             type: 'input',
-            message: 'Input bot token',
+            message: 'bot token:',
             name: 'token',
-            default: '',
+            when: !token
         },
     ];
-    let bot = token;
+    const q = yield inquirer_1.default.prompt(questions);
+    const answers = yield q;
     if (!token) {
-        const q = yield inquirer_1.default.prompt(questions);
-        const answers = yield q;
-        bot = answers.token;
+        token = answers.token;
     }
-    console.log(bot);
+    console.log(token);
     console.log(photo);
     console.log(caption);
     console.log(chat_ids);

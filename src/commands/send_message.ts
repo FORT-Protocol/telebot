@@ -1,25 +1,24 @@
 import inquirer from 'inquirer'
 
 export const send_message = async (
-    token: string,
+    token: string | undefined,
     text: string,
     chat_ids: string[]
 ) => {
     const questions = [
         {
             type: 'input',
-            message: 'Input bot token',
+            message: 'bot token:',
             name: 'token',
-            default: '',
+            when: !token
         },
     ]
-    let bot = token
-    if (!token) {
-        const q = await inquirer.prompt(questions)
-        const answers = await q
-        bot = answers.token
+    const q = await inquirer.prompt(questions)
+    const answers = await q
+    if (!token){
+        token = answers.token
     }
-    console.log('token:', bot)
+    console.log('token:', token)
     console.log('text:', text)
     console.log('chat_ids:', chat_ids)
 }
