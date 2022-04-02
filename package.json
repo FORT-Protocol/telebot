@@ -10,7 +10,6 @@
         "build": "tsc",
         "start": "tsc --watch",
         "lint": "eslint . --ext .ts",
-        "dev": "bin/index.js",
         "format": "prettier --write ."
     },
     "repository": {
