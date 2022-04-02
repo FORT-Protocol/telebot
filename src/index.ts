@@ -1,5 +1,5 @@
 #! /usr/bin/env node
-import { createCommand } from 'commander'
+import {createCommand} from 'commander'
 import Chalk from 'chalk'
 import send_message from './commands/send_message'
 import send_video from './commands/send_video'
@@ -8,7 +8,6 @@ import send from './commands/send'
 
 const telebot = createCommand()
 
-// name, version, global-option
 telebot
     .name('telebot')
     .version('1.0.0')
@@ -20,13 +19,20 @@ telebot
     .action(async () => {
         await send()
     })
+    .addHelpText(
+        'after',
+        `
+Examples:
+  $ tb send
+  $ telebot send
+  `
+    )
 
-// send-message
 telebot
     .command('send-message <text> [chat_ids...]')
     .alias('message')
     .description('send message to user')
-    .action(async (text, chat_ids, options) => {
+    .action(async (text, chat_ids) => {
         const token = telebot.getOptionValue('token')
         if (chat_ids.length > 0) {
             await send_message(token, text, chat_ids)
@@ -38,11 +44,11 @@ telebot
         'after',
         `
 Examples:
+  $ tb message 'hello' chat_id1 chat_id2
   $ telebot send-message 'hello' chat_id1 chat_id2
   `
     )
 
-// send-video
 telebot
     .command('send-video <video> [chat_ids...]')
     .alias('video')
@@ -63,11 +69,11 @@ telebot
         'after',
         `
 Examples:
+  $ tb video 'uri' chat_id1 chat_id2 --caption 'hello'
   $ telebot send-video 'uri' chat_id1 chat_id2 --caption 'hello'
   `
     )
 
-// send-photo
 telebot
     .command('send-photo <photo> [chat_ids...]')
     .alias('photo')
@@ -89,6 +95,7 @@ telebot
         'after',
         `
 Examples:
+  $ tb photo 'uri' chat_id1 chat_id2 --caption 'hello'
   $ telebot send-photo 'uri' chat_id1 chat_id2 --caption 'hello'
   `
     )
