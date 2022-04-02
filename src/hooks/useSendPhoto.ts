@@ -14,7 +14,10 @@ export const useSendPhoto = async (token: string, photo: string, caption: string
             chat_id: chat_id,
             photo: photo,
             caption: caption
-        })
+        }),
+        headers: {
+            'Content-Type': 'application/json',
+        }
     })
     const res = await q.json()
     console.log(res)

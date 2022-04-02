@@ -1,4 +1,4 @@
-import { RateLimiter } from "limiter"
+import {RateLimiter} from "limiter"
 import fetch from 'node-fetch'
 
 const limiter = new RateLimiter({
@@ -13,7 +13,10 @@ export const useSendMessage = async (token: string, text: string, chat_id: strin
         body: JSON.stringify({
             chat_id: chat_id,
             text: text,
-        })
+        }),
+        headers: {
+            'Content-Type': 'application/json',
+        }
     })
     const res = await q.json()
     console.log(res)

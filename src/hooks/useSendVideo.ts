@@ -14,7 +14,10 @@ export const useSendVideo = async (token: string, video: string, caption: string
             chat_id: chat_id,
             video: video,
             caption: caption
-        })
+        }),
+        headers: {
+            'Content-Type': 'application/json',
+        }
     })
     const res = await q.json()
     console.log(res)
