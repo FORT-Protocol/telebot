@@ -30,20 +30,22 @@ export const send_photo = async (
         token = answers.token
     }
     if (confirmed || answers.confirmed) {
+        let success = 0
         for (const index in chat_ids) {
             await useSendPhoto(token!, photo, caption, chat_ids[index])
                 .then(({ok, username}) => {
                     if (ok) {
-                        console.log(Chalk.green(`Total:${chat_ids.length}  No.${Number(index) + 1}  ${username}`))
+                        success++
+                        console.log(Chalk.green(`Sending photo to ${username}... ${Number(index) + 1}/${chat_ids.length} (${((Number(index) + 1) / chat_ids.length * 100).toFixed(2)}%)`))
                     } else {
-                        console.log(Chalk.red(`Total:${chat_ids.length}  No.${Number(index) + 1}  ${username}`))
+                        console.log(Chalk.dim(`Sending photo to ${username}... ${Number(index) + 1}/${chat_ids.length} (${((Number(index) + 1) / chat_ids.length * 100).toFixed(2)}%)`))
                     }
                 })
         }
-        console.log(Chalk.green('\nMission Completed!'))
+        console.log(`Mission Completed! Total: ${chat_ids.length} Success: ${success}`)
         return
     }
-    console.log('Cancel this send job!')
+    console.log(Chalk.red('Cancel this send job!'))
 }
 
 export default send_photo
