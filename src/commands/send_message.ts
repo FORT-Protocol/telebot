@@ -1,4 +1,5 @@
 import inquirer from 'inquirer'
+import useSendMessage from "../hooks/useSendMessage";
 
 export const send_message = async (
     token: string | undefined,
@@ -23,13 +24,13 @@ export const send_message = async (
     ]
     const q = await inquirer.prompt(questions)
     const answers = await q
-    if (!token){
+    if (token === undefined){
         token = answers.token
     }
     if (confirmed || answers.confirmed) {
-        console.log('token:', token)
-        console.log('text:', text)
-        console.log('chat_ids:', chat_ids)
+        chat_ids.forEach((chat_id)=> {
+            useSendMessage(token!, text, chat_id)
+        })
         return
     }
     console.log('Cancel the job!')

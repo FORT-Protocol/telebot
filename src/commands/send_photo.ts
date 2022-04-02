@@ -1,4 +1,5 @@
 import inquirer from 'inquirer'
+import useSendPhoto from "../hooks/useSendPhoto";
 
 export const send_photo = async (
     token: string | undefined,
@@ -28,10 +29,9 @@ export const send_photo = async (
         token = answers.token
     }
     if (confirmed || answers.confirmed) {
-        console.log(token)
-        console.log(photo)
-        console.log(caption)
-        console.log(chat_ids)
+        chat_ids.forEach((chat_id)=> {
+            useSendPhoto(token!, photo, caption, chat_id)
+        })
         return
     }
     console.log('Cancel this send job!')

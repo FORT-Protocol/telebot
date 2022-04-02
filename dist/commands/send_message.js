@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.send_message = void 0;
 const inquirer_1 = __importDefault(require("inquirer"));
+const useSendMessage_1 = __importDefault(require("../hooks/useSendMessage"));
 const send_message = (token, text, chat_ids, confirmed) => __awaiter(void 0, void 0, void 0, function* () {
     const questions = [
         {
@@ -32,13 +33,13 @@ const send_message = (token, text, chat_ids, confirmed) => __awaiter(void 0, voi
     ];
     const q = yield inquirer_1.default.prompt(questions);
     const answers = yield q;
-    if (!token) {
+    if (token === undefined) {
         token = answers.token;
     }
     if (confirmed || answers.confirmed) {
-        console.log('token:', token);
-        console.log('text:', text);
-        console.log('chat_ids:', chat_ids);
+        chat_ids.forEach((chat_id) => {
+            (0, useSendMessage_1.default)(token, text, chat_id);
+        });
         return;
     }
     console.log('Cancel the job!');

@@ -1,0 +1,1 @@
+{"version":3,"file":"useSendVideo.js","sourceRoot":"","sources":["../../src/hooks/useSendVideo.ts"],"names":[],"mappings":";;;;;;;;;;;;AAAO,MAAM,YAAY,GAAG,CAAO,KAAa,EAAE,KAAa,EAAE,OAA2B,EAAE,OAAe,EAAE,EAAE;IAC7G,OAAO,CAAC,GAAG,CAAC,KAAK,EAAE,KAAK,EAAE,OAAO,EAAE,OAAO,CAAC,CAAA;AAC/C,CAAC,CAAA,CAAA;AAFY,QAAA,YAAY,gBAExB;AAED,kBAAe,oBAAY,CAAA"}

@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.send_photo = void 0;
 const inquirer_1 = __importDefault(require("inquirer"));
+const useSendPhoto_1 = __importDefault(require("../hooks/useSendPhoto"));
 const send_photo = (token, photo, chat_ids, caption, confirmed) => __awaiter(void 0, void 0, void 0, function* () {
     const questions = [
         {
@@ -36,10 +37,9 @@ const send_photo = (token, photo, chat_ids, caption, confirmed) => __awaiter(voi
         token = answers.token;
     }
     if (confirmed || answers.confirmed) {
-        console.log(token);
-        console.log(photo);
-        console.log(caption);
-        console.log(chat_ids);
+        chat_ids.forEach((chat_id) => {
+            (0, useSendPhoto_1.default)(token, photo, caption, chat_id);
+        });
         return;
     }
     console.log('Cancel this send job!');
