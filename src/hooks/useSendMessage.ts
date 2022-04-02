@@ -1,5 +1,5 @@
 import {RateLimiter} from "limiter"
-import fetch from 'node-fetch'
+import axios from "axios";
 
 const limiter = new RateLimiter({
     tokensPerInterval: 30,
@@ -8,17 +8,15 @@ const limiter = new RateLimiter({
 
 export const useSendMessage = async (token: string, text: string, chat_id: string) => {
     await limiter.removeTokens(1)
-    const q = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-        method: 'POST',
-        body: JSON.stringify({
+    const q = await axios({
+        url: `https://api.telegram.org/bot${token}/sendMessage`,
+        method: 'post',
+        data: {
             chat_id: chat_id,
             text: text,
-        }),
-        headers: {
-            'Content-Type': 'application/json',
         }
     })
-    const res = await q.json()
+    const res = await q.data
     console.log(res)
 }
 
