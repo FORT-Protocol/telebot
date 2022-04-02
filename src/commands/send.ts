@@ -51,10 +51,15 @@ export const send = async (token: string | undefined, confirmed: boolean) => {
         {
             type: 'editor',
             name: 'caption',
-            message: 'input the caption:',
+            message: 'Input the caption:',
             when: (answers: any) => {
                 return (answers.method === 'Photo' || answers.method === 'Video') && answers.hasCaption
             }
+        },
+        {
+            type: 'editor',
+            name: 'chat_ids',
+            message: 'Input the chat_ids:'
         },
         {
             type: 'confirm',
@@ -74,14 +79,21 @@ export const send = async (token: string | undefined, confirmed: boolean) => {
         switch (answers.method) {
             case 'Message':
                 console.log('text:', answers.text)
+                console.log('chat_ids:', answers.chat_ids)
                 break
             case 'Video':
                 console.log('video:', answers.video)
-                console.log('caption', answers.caption)
+                if (answers.caption) {
+                    console.log('caption', answers.caption)
+                }
+                console.log('chat_ids:', answers.chat_ids)
                 break
             case 'Photo':
                 console.log('photo:', answers.photo)
-                console.log('caption', answers.caption)
+                if (answers.caption) {
+                    console.log('caption', answers.caption)
+                }
+                console.log('chat_ids:', answers.chat_ids)
                 break
             default:
                 console.log('Error method!')

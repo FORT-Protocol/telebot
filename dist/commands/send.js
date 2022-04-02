@@ -65,10 +65,15 @@ const send = (token, confirmed) => __awaiter(void 0, void 0, void 0, function* (
         {
             type: 'editor',
             name: 'caption',
-            message: 'input the caption:',
+            message: 'Input the caption:',
             when: (answers) => {
                 return (answers.method === 'Photo' || answers.method === 'Video') && answers.hasCaption;
             }
+        },
+        {
+            type: 'editor',
+            name: 'chat_ids',
+            message: 'Input the chat_ids:'
         },
         {
             type: 'confirm',
@@ -88,14 +93,21 @@ const send = (token, confirmed) => __awaiter(void 0, void 0, void 0, function* (
         switch (answers.method) {
             case 'Message':
                 console.log('text:', answers.text);
+                console.log('chat_ids:', answers.chat_ids);
                 break;
             case 'Video':
                 console.log('video:', answers.video);
-                console.log('caption', answers.caption);
+                if (answers.caption) {
+                    console.log('caption', answers.caption);
+                }
+                console.log('chat_ids:', answers.chat_ids);
                 break;
             case 'Photo':
                 console.log('photo:', answers.photo);
-                console.log('caption', answers.caption);
+                if (answers.caption) {
+                    console.log('caption', answers.caption);
+                }
+                console.log('chat_ids:', answers.chat_ids);
                 break;
             default:
                 console.log('Error method!');
