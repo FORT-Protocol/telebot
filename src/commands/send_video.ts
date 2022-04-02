@@ -25,16 +25,17 @@ export const send_video = async (
     ]
     const q = await inquirer.prompt(questions)
     const answers = await q
-    if (!token){
+    if (!token) {
         token = answers.token
     }
     if (confirmed || answers.confirmed) {
-        chat_ids.forEach((chat_id)=> {
-            useSendVideo(token!, video, caption, chat_id)
+        for (const index in chat_ids) {
+            await useSendVideo(token!, video, caption, chat_ids[index])
                 .then(({ok, username}) => {
-                    console.log(`${username} send status: ${ok ? 'success' : 'error' }`)
+                    console.log(`Process: ${Number(index + 1)}/${chat_ids.length}, ${username}, ${ok ? 'success' : 'error' }`)
                 })
-        })
+        }
+        console.log('Over!')
         return
     }
     console.log('Cancel this send job!')

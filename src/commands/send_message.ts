@@ -28,14 +28,16 @@ export const send_message = async (
         token = answers.token
     }
     if (confirmed || answers.confirmed) {
-        chat_ids.forEach((chat_id) => {
-            useSendMessage(token!, text, chat_id)
+        for (const index in chat_ids) {
+           await useSendMessage(token!, text, chat_ids[index])
                 .then(({ok, username}) => {
-                    console.log(`${username} send status: ${ok ? 'success' : 'error' }`)
+                    console.log(`Process: ${Number(index + 1)}/${chat_ids.length}, ${username}, ${ok ? 'success' : 'error' }`)
                 })
-        })
+        }
+        console.log('Over!')
         return
     }
+    
     console.log('Cancel the job!')
 }
 

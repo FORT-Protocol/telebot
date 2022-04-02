@@ -29,12 +29,13 @@ export const send_photo = async (
         token = answers.token
     }
     if (confirmed || answers.confirmed) {
-        chat_ids.forEach((chat_id)=> {
-            useSendPhoto(token!, photo, caption, chat_id)
+        for (const index in chat_ids) {
+            await useSendPhoto(token!, photo, caption, chat_ids[index])
                 .then(({ok, username}) => {
-                    console.log(`${username} send status: ${ok ? 'success' : 'error' }`)
+                    console.log(`Process: ${Number(index + 1)}/${chat_ids.length}, ${username}, ${ok ? 'success' : 'error' }`)
                 })
-        })
+        }
+        console.log('Over!')
         return
     }
     console.log('Cancel this send job!')

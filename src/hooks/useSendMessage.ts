@@ -18,7 +18,7 @@ export const useSendMessage = async (token: string, text: string, chat_id: strin
     })
     const res = await q.data
     return {
-        username: res?.result?.chat?.username ?? 'no username',
+        username: res?.result?.chat?.username ?? undefined,
         ok: res?.ok ?? false
     }
 }
