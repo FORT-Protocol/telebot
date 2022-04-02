@@ -31,6 +31,9 @@ export const send_video = async (
     if (confirmed || answers.confirmed) {
         chat_ids.forEach((chat_id)=> {
             useSendVideo(token!, video, caption, chat_id)
+                .then(({ok, username}) => {
+                    console.log(`${username} send status: ${ok ? 'success' : 'error' }`)
+                })
         })
         return
     }

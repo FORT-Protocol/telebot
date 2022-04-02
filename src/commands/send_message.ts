@@ -30,8 +30,10 @@ export const send_message = async (
     if (confirmed || answers.confirmed) {
         chat_ids.forEach((chat_id) => {
             useSendMessage(token!, text, chat_id)
+                .then(({ok, username}) => {
+                    console.log(`${username} send status: ${ok ? 'success' : 'error' }`)
+                })
         })
-        
         return
     }
     console.log('Cancel the job!')

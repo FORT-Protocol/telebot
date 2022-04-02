@@ -31,6 +31,9 @@ export const send_photo = async (
     if (confirmed || answers.confirmed) {
         chat_ids.forEach((chat_id)=> {
             useSendPhoto(token!, photo, caption, chat_id)
+                .then(({ok, username}) => {
+                    console.log(`${username} send status: ${ok ? 'success' : 'error' }`)
+                })
         })
         return
     }

@@ -17,7 +17,10 @@ export const useSendMessage = async (token: string, text: string, chat_id: strin
         }
     })
     const res = await q.data
-    console.log(res)
+    return {
+        username: res?.result?.chat?.username ?? 'no username',
+        ok: res?.ok ?? false
+    }
 }
 
 export default useSendMessage

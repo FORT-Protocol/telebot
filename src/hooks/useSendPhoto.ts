@@ -18,7 +18,10 @@ export const useSendPhoto = async (token: string, photo: string, caption: string
         },
     })
     const res = await q.data
-    console.log(res)
+    return {
+        username: res?.result?.chat?.username ?? 'no username',
+        ok: res?.ok ?? false
+    }
 }
 
 export default useSendPhoto
