@@ -1,9 +1,10 @@
 #! /usr/bin/env node
-import {createCommand} from 'commander'
+import { createCommand } from 'commander'
 import Chalk from 'chalk'
-import send_message from './send_message'
-import send_video from './send_video'
-import send_photo from './send_photo'
+import send_message from './commands/send_message'
+import send_video from './commands/send_video'
+import send_photo from './commands/send_photo'
+import send from './commands/send'
 
 const telebot = createCommand()
 
@@ -12,6 +13,13 @@ telebot
     .name('telebot')
     .version('1.0.0')
     .option('-T, --token [token]', 'telegram bot token')
+
+telebot
+    .command('send')
+    .description('easy send via bot')
+    .action(async () => {
+        await send()
+    })
 
 // send-message
 telebot
@@ -46,7 +54,7 @@ telebot
     .action(async (video, chat_ids, options) => {
         const token = telebot.getOptionValue('token')
         if (chat_ids.length > 0) {
-           await send_video(token, video, chat_ids, options.caption)
+            await send_video(token, video, chat_ids, options.caption)
         } else {
             console.log(Chalk.green('Send video over:'), Chalk.red('0 user'))
         }

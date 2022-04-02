@@ -1,4 +1,4 @@
-import inquirer from "inquirer";
+import inquirer from 'inquirer'
 
 export const send_video = async (
     token: string,
@@ -8,11 +8,11 @@ export const send_video = async (
 ) => {
     const questions = [
         {
-            type: "input",
-            message: "Input bot token",
-            name: "token",
-            default: ""
-        }
+            type: 'input',
+            message: 'Input bot token',
+            name: 'token',
+            default: '',
+        },
     ]
     let bot = token
     if (!token) {
