@@ -14,13 +14,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.send_photo = void 0;
 const inquirer_1 = __importDefault(require("inquirer"));
-const send_photo = (token, photo, chat_ids, caption) => __awaiter(void 0, void 0, void 0, function* () {
+const send_photo = (token, photo, chat_ids, caption, confirmed) => __awaiter(void 0, void 0, void 0, function* () {
     const questions = [
         {
             type: 'input',
-            message: 'bot token:',
             name: 'token',
+            message: 'Bot Token:',
             when: !token
+        },
+        {
+            type: 'confirm',
+            name: 'confirm',
+            message: 'Is now to send message?',
+            default: true,
+            when: !confirmed
         },
     ];
     const q = yield inquirer_1.default.prompt(questions);
@@ -28,10 +35,14 @@ const send_photo = (token, photo, chat_ids, caption) => __awaiter(void 0, void 0
     if (!token) {
         token = answers.token;
     }
-    console.log(token);
-    console.log(photo);
-    console.log(caption);
-    console.log(chat_ids);
+    if (confirmed || answers.confirm) {
+        console.log(token);
+        console.log(photo);
+        console.log(caption);
+        console.log(chat_ids);
+        return;
+    }
+    console.log('Cancel this send job!');
 });
 exports.send_photo = send_photo;
 exports.default = exports.send_photo;

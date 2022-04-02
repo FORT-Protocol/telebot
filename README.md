@@ -33,7 +33,7 @@ telebot -V
 send a `message`
 
 ```shell
-telebot send-message 'hello' chat_id1 chat_id2
+telebot send-message 'hello' chat_id1 chat_id2 -y
 ```
 
 ## send-photo
@@ -41,7 +41,7 @@ telebot send-message 'hello' chat_id1 chat_id2
 send a `photo`
 
 ```shell
-telebot send-photo 'uri' chat_id1 chat_id2 --caption 'hello'
+telebot send-photo 'uri' chat_id1 chat_id2 --caption 'hello' -y 
 ```
 
 ## send-video
@@ -49,5 +49,5 @@ telebot send-photo 'uri' chat_id1 chat_id2 --caption 'hello'
 send a `video`
 
 ```shell
-telebot send-video 'uri' chat_id1 chat_id2 --caption 'hello'
+telebot send-video 'uri' chat_id1 chat_id2 --caption 'hello' -y
 ```

@@ -16,9 +16,10 @@ telebot
 telebot
     .command('send')
     .description('easy send via bot')
-    .action(async () => {
+    .option('-y, --yes', 'confirmed', false)
+    .action(async (options) => {
         const token = telebot.getOptionValue('token')
-        await send(token)
+        await send(token, options.yes)
     })
     .addHelpText(
         'after',
@@ -33,10 +34,11 @@ telebot
     .command('send-message <text> [chat_ids...]')
     .alias('message')
     .description('send message to user')
-    .action(async (text, chat_ids) => {
+    .option('-y, --yes', 'confirmed', false)
+    .action(async (text, chat_ids, options) => {
         const token = telebot.getOptionValue('token')
         if (chat_ids.length > 0) {
-            await send_message(token, text, chat_ids)
+            await send_message(token, text, chat_ids, options.yes)
         } else {
             console.log(Chalk.green('Send message over:'), Chalk.red('0 user'))
         }
@@ -53,15 +55,16 @@ Examples:
 telebot
     .command('send-video <video> [chat_ids...]')
     .alias('video')
+    .description('send video to chat_id user')
     .option(
         '--caption <caption>',
         'video caption (may also be used when resending videos by file_id), 0-1024 characters after entities parsing'
     )
-    .description('send video to chat_id user')
+    .option('-y, --yes', 'confirmed', false)
     .action(async (video, chat_ids, options) => {
         const token = telebot.getOptionValue('token')
         if (chat_ids.length > 0) {
-            await send_video(token, video, chat_ids, options.caption)
+            await send_video(token, video, chat_ids, options.caption, options.yes)
         } else {
             console.log(Chalk.green('Send video over:'), Chalk.red('0 user'))
         }
@@ -78,15 +81,16 @@ Examples:
 telebot
     .command('send-photo <photo> [chat_ids...]')
     .alias('photo')
+    .description('send photo to chat_id user')
     .option(
         '--caption <caption>',
         'photo caption (may also be used when resending photos by file_id), 0-1024 characters after entities parsing'
     )
-    .description('send photo to chat_id user')
+    .option('-y, --yes', 'confirmed', false)
     .action(async (photo, chat_ids, options) => {
         const token = telebot.getOptionValue('token')
         if (chat_ids.length > 0) {
-            await send_photo(token, photo, chat_ids, options.caption)
+            await send_photo(token, photo, chat_ids, options.caption, options.yes)
         } else {
             console.log(Chalk.green('Send photo over:'), Chalk.red('0 user'))
         }

@@ -3,14 +3,22 @@ import inquirer from 'inquirer'
 export const send_message = async (
     token: string | undefined,
     text: string,
-    chat_ids: string[]
+    chat_ids: string[],
+    confirmed: boolean
 ) => {
     const questions = [
         {
             type: 'input',
-            message: 'bot token:',
             name: 'token',
+            message: 'Bot Token:',
             when: !token
+        },
+        {
+            type: 'confirm',
+            name: 'confirm',
+            message: 'Is now to send message?',
+            default: true,
+            when: !confirmed
         },
     ]
     const q = await inquirer.prompt(questions)
@@ -18,9 +26,13 @@ export const send_message = async (
     if (!token){
         token = answers.token
     }
-    console.log('token:', token)
-    console.log('text:', text)
-    console.log('chat_ids:', chat_ids)
+    if (answers.confirm || confirmed) {
+        console.log('token:', token)
+        console.log('text:', text)
+        console.log('chat_ids:', chat_ids)
+        return
+    }
+    console.log('Cancel the job!')
 }
 
 export default send_message

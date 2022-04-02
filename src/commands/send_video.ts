@@ -4,14 +4,22 @@ export const send_video = async (
     token: string | undefined,
     video: string,
     chat_ids: string[],
-    caption: string | undefined
+    caption: string | undefined,
+    confirmed: boolean
 ) => {
     const questions = [
         {
             type: 'input',
-            message: 'bot token:',
             name: 'token',
+            message: 'Bot Token:',
             when: !token
+        },
+        {
+            type: 'confirm',
+            name: 'confirm',
+            message: 'Is now to send message?',
+            default: true,
+            when: !confirmed
         },
     ]
     const q = await inquirer.prompt(questions)
@@ -19,10 +27,14 @@ export const send_video = async (
     if (!token){
         token = answers.token
     }
-    console.log(token)
-    console.log(video)
-    console.log(caption)
-    console.log(chat_ids)
+    if (confirmed || answers.confirm) {
+        console.log(token)
+        console.log(video)
+        console.log(caption)
+        console.log(chat_ids)
+        return
+    }
+    console.log('Cancel this send job!')
 }
 
 export default send_video

@@ -14,13 +14,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.send_message = void 0;
 const inquirer_1 = __importDefault(require("inquirer"));
-const send_message = (token, text, chat_ids) => __awaiter(void 0, void 0, void 0, function* () {
+const send_message = (token, text, chat_ids, confirmed) => __awaiter(void 0, void 0, void 0, function* () {
     const questions = [
         {
             type: 'input',
-            message: 'bot token:',
             name: 'token',
+            message: 'Bot Token:',
             when: !token
+        },
+        {
+            type: 'confirm',
+            name: 'confirm',
+            message: 'Is now to send message?',
+            default: true,
+            when: !confirmed
         },
     ];
     const q = yield inquirer_1.default.prompt(questions);
@@ -28,9 +35,13 @@ const send_message = (token, text, chat_ids) => __awaiter(void 0, void 0, void 0
     if (!token) {
         token = answers.token;
     }
-    console.log('token:', token);
-    console.log('text:', text);
-    console.log('chat_ids:', chat_ids);
+    if (answers.confirm || confirmed) {
+        console.log('token:', token);
+        console.log('text:', text);
+        console.log('chat_ids:', chat_ids);
+        return;
+    }
+    console.log('Cancel the job!');
 });
 exports.send_message = send_message;
 exports.default = exports.send_message;

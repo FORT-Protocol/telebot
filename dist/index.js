@@ -27,9 +27,10 @@ telebot
 telebot
     .command('send')
     .description('easy send via bot')
-    .action(() => __awaiter(void 0, void 0, void 0, function* () {
+    .option('-y, --yes', 'confirmed', false)
+    .action((options) => __awaiter(void 0, void 0, void 0, function* () {
     const token = telebot.getOptionValue('token');
-    yield (0, send_1.default)(token);
+    yield (0, send_1.default)(token, options.yes);
 }))
     .addHelpText('after', `
 Examples:
@@ -40,10 +41,11 @@ telebot
     .command('send-message <text> [chat_ids...]')
     .alias('message')
     .description('send message to user')
-    .action((text, chat_ids) => __awaiter(void 0, void 0, void 0, function* () {
+    .option('-y, --yes', 'confirmed', false)
+    .action((text, chat_ids, options) => __awaiter(void 0, void 0, void 0, function* () {
     const token = telebot.getOptionValue('token');
     if (chat_ids.length > 0) {
-        yield (0, send_message_1.default)(token, text, chat_ids);
+        yield (0, send_message_1.default)(token, text, chat_ids, options.yes);
     }
     else {
         console.log(chalk_1.default.green('Send message over:'), chalk_1.default.red('0 user'));
@@ -57,12 +59,13 @@ Examples:
 telebot
     .command('send-video <video> [chat_ids...]')
     .alias('video')
-    .option('--caption <caption>', 'video caption (may also be used when resending videos by file_id), 0-1024 characters after entities parsing')
     .description('send video to chat_id user')
+    .option('--caption <caption>', 'video caption (may also be used when resending videos by file_id), 0-1024 characters after entities parsing')
+    .option('-y, --yes', 'confirmed', false)
     .action((video, chat_ids, options) => __awaiter(void 0, void 0, void 0, function* () {
     const token = telebot.getOptionValue('token');
     if (chat_ids.length > 0) {
-        yield (0, send_video_1.default)(token, video, chat_ids, options.caption);
+        yield (0, send_video_1.default)(token, video, chat_ids, options.caption, options.yes);
     }
     else {
         console.log(chalk_1.default.green('Send video over:'), chalk_1.default.red('0 user'));
@@ -76,12 +79,13 @@ Examples:
 telebot
     .command('send-photo <photo> [chat_ids...]')
     .alias('photo')
-    .option('--caption <caption>', 'photo caption (may also be used when resending photos by file_id), 0-1024 characters after entities parsing')
     .description('send photo to chat_id user')
+    .option('--caption <caption>', 'photo caption (may also be used when resending photos by file_id), 0-1024 characters after entities parsing')
+    .option('-y, --yes', 'confirmed', false)
     .action((photo, chat_ids, options) => __awaiter(void 0, void 0, void 0, function* () {
     const token = telebot.getOptionValue('token');
     if (chat_ids.length > 0) {
-        yield (0, send_photo_1.default)(token, photo, chat_ids, options.caption);
+        yield (0, send_photo_1.default)(token, photo, chat_ids, options.caption, options.yes);
     }
     else {
         console.log(chalk_1.default.green('Send photo over:'), chalk_1.default.red('0 user'));
