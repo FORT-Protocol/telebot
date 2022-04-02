@@ -20,7 +20,6 @@ const send_video_1 = __importDefault(require("./commands/send_video"));
 const send_photo_1 = __importDefault(require("./commands/send_photo"));
 const send_1 = __importDefault(require("./commands/send"));
 const telebot = (0, commander_1.createCommand)();
-// name, version, global-option
 telebot
     .name('telebot')
     .version('1.0.0')
@@ -30,13 +29,17 @@ telebot
     .description('easy send via bot')
     .action(() => __awaiter(void 0, void 0, void 0, function* () {
     yield (0, send_1.default)();
-}));
-// send-message
+}))
+    .addHelpText('after', `
+Examples:
+  $ tb send
+  $ telebot send
+  `);
 telebot
     .command('send-message <text> [chat_ids...]')
     .alias('message')
     .description('send message to user')
-    .action((text, chat_ids, options) => __awaiter(void 0, void 0, void 0, function* () {
+    .action((text, chat_ids) => __awaiter(void 0, void 0, void 0, function* () {
     const token = telebot.getOptionValue('token');
     if (chat_ids.length > 0) {
         yield (0, send_message_1.default)(token, text, chat_ids);
@@ -47,9 +50,9 @@ telebot
 }))
     .addHelpText('after', `
 Examples:
+  $ tb message 'hello' chat_id1 chat_id2
   $ telebot send-message 'hello' chat_id1 chat_id2
   `);
-// send-video
 telebot
     .command('send-video <video> [chat_ids...]')
     .alias('video')
@@ -66,14 +69,13 @@ telebot
 }))
     .addHelpText('after', `
 Examples:
+  $ tb video 'uri' chat_id1 chat_id2 --caption 'hello'
   $ telebot send-video 'uri' chat_id1 chat_id2 --caption 'hello'
   `);
-// send-photo
 telebot
     .command('send-photo <photo> [chat_ids...]')
     .alias('photo')
     .option('--caption <caption>', 'photo caption (may also be used when resending photos by file_id), 0-1024 characters after entities parsing')
-    .option('--file <file>', 'chat_ids file')
     .description('send photo to chat_id user')
     .action((photo, chat_ids, options) => __awaiter(void 0, void 0, void 0, function* () {
     const token = telebot.getOptionValue('token');
@@ -86,6 +88,7 @@ telebot
 }))
     .addHelpText('after', `
 Examples:
+  $ tb photo 'uri' chat_id1 chat_id2 --caption 'hello'
   $ telebot send-photo 'uri' chat_id1 chat_id2 --caption 'hello'
   `);
 telebot.parse(process.argv);
