@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from 'axios-https-proxy-fix'
 import Chalk from 'chalk'
 import {RateLimiter} from 'limiter'
 
@@ -6,6 +6,10 @@ const limiter = new RateLimiter({
     tokensPerInterval: 30,
     interval: 'second',
 })
+
+const reg = new RegExp(/(\w+):\/\/([^/:]+)(:\d*)?/)
+const proxy = process.env.http_proxy
+const result = (proxy || '').match(reg)
 
 export const useSendMessage = async (
     token: string,
@@ -24,6 +28,10 @@ export const useSendMessage = async (
                 chat_id: chat_ids[index],
                 text: text,
             },
+            proxy: proxy ? {
+                host: result ? result[2] : 'localhost',
+                port: result ? Number(result[3].slice(1)) : 80,
+            } : false
         }).catch(()=>{
         })
         console.log(
