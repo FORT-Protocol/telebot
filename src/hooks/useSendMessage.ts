@@ -39,7 +39,7 @@ export const useSendMessage = async (
     const end = Date.now()
     console.log(
         Chalk.green(
-            `\nSuccessfully completed the sending task. Spend time ${((end - start)/1000).toFixed(2)}s, ${((chat_ids.length) * 1000 / (end - start)).toFixed(
+            `\nSuccessfully completed the sending task. Spend time ${((end - start)/1000).toFixed(2)} seconds, ${((chat_ids.length) * 1000 / (end - start)).toFixed(
                 2
             )}/s, done.`
         )
