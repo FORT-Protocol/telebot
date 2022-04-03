@@ -31,21 +31,24 @@ export const send_video = async (
     }
     if (confirmed || answers.confirmed) {
         let success = 0
+        const start = Date.now()
+        console.log(`local: Start sending video...`)
         for (const index in chat_ids) {
             await useSendVideo(token!, video, caption, chat_ids[index])
                 .then(({ok, username}) => {
                     if (ok) {
                         success++
-                        console.log(Chalk.green(`Sending video to ${username}... ${Number(index) + 1}/${chat_ids.length} (${((Number(index) + 1) / chat_ids.length * 100).toFixed(2)}%)`))
+                        console.log(`local: Sending video to ${username} ${((Number(index) + 1) / chat_ids.length * 100).toFixed(2)}% (${Number(index) + 1}/${chat_ids.length}), done.`)
                     } else {
-                        console.log(Chalk.dim(`Sending video to ${username}... ${Number(index) + 1}/${chat_ids.length} (${((Number(index) + 1) / chat_ids.length * 100).toFixed(2)}%)`))
+                        console.log(`local: Sending video to ${username} ${((Number(index) + 1) / chat_ids.length * 100).toFixed(2)}% (${Number(index) + 1}/${chat_ids.length}), done.`)
                     }
                 })
         }
-        console.log(`Mission Completed! Total: ${chat_ids.length} Success: ${success}`)
+        const end = Date.now()
+        console.log(Chalk.green(`\nSuccessfully completed the sending task: (${success}/${chat_ids.length}), ${((end - start) / (1000 * chat_ids.length)).toFixed(2)}/s, done.`))
         return
     }
-    console.log(Chalk.red('Cancel this send job!'))
+    console.log(Chalk.red('\nCancel this send task.'))
 }
 
 export default send_video
