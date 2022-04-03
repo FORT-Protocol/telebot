@@ -28,26 +28,17 @@ get version of telebot
 telebot -V
 ```
 
-## send-message
-
-send a `message`
+## send
 
 ```shell
+telebot send
 telebot send-message 'hello' chat_id1 chat_id2 -y
-```
-
-## send-photo
-
-send a `photo`
-
-```shell
 telebot send-photo 'uri' chat_id1 chat_id2 --caption 'hello' -y
+telebot send-video 'uri' chat_id1 chat_id2 --caption 'hello' -y
 ```
 
-## send-video
-
-send a `video`
+if chat_id from stdout, you can use `xargs` like this
 
 ```shell
-telebot send-video 'uri' chat_id1 chat_id2 --caption 'hello' -y
+echo 'chat_id1 chat_id2' | xargs telebot send-message 'hello' -y
 ```
