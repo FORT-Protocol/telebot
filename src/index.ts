@@ -1,10 +1,10 @@
 #! /usr/bin/env node
-import { createCommand } from 'commander'
-import Chalk from 'chalk'
-import send_message from './commands/send_message'
-import send_video from './commands/send_video'
-import send_photo from './commands/send_photo'
-import send from './commands/send'
+import send_message from './commands/send_message.js'
+import send_video from './commands/send_video.js'
+import send_photo from './commands/send_photo.js'
+import send from './commands/send.js'
+import {createCommand} from "commander"
+import Chalk from "chalk"
 
 const telebot = createCommand()
 
@@ -17,7 +17,7 @@ telebot
     .command('send')
     .description('easy send via bot')
     .option('-y, --yes', 'confirmed', false)
-    .action(async (options) => {
+    .action(async (options: any) => {
         const token = telebot.getOptionValue('token')
         await send(token, options.yes)
     })
@@ -35,7 +35,7 @@ telebot
     .alias('message')
     .description('send message to user')
     .option('-y, --yes', 'confirmed', false)
-    .action(async (text, chat_ids, options) => {
+    .action(async (text: string, chat_ids: string[], options: any) => {
         const token = telebot.getOptionValue('token')
         if (chat_ids.length > 0) {
             await send_message(token, text, chat_ids, options.yes)
@@ -61,7 +61,7 @@ telebot
         'video caption (may also be used when resending videos by file_id), 0-1024 characters after entities parsing'
     )
     .option('-y, --yes', 'confirmed', false)
-    .action(async (video, chat_ids, options) => {
+    .action(async (video: string, chat_ids: string[], options: any) => {
         const token = telebot.getOptionValue('token')
         if (chat_ids.length > 0) {
             await send_video(token, video, chat_ids, options.caption, options.yes)
@@ -87,7 +87,7 @@ telebot
         'photo caption (may also be used when resending photos by file_id), 0-1024 characters after entities parsing'
     )
     .option('-y, --yes', 'confirmed', false)
-    .action(async (photo, chat_ids, options) => {
+    .action(async (photo: string, chat_ids: string[], options: any) => {
         const token = telebot.getOptionValue('token')
         if (chat_ids.length > 0) {
             await send_photo(token, photo, chat_ids, options.caption, options.yes)

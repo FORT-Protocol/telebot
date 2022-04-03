@@ -1,16 +1,17 @@
-import { RateLimiter } from "limiter"
 import axios from "axios";
 import Chalk from "chalk";
+import {RateLimiter} from "limiter";
 
-const limiter = new RateLimiter({
+
+const lmt = new RateLimiter({
     tokensPerInterval: 30,
     interval: "second",
 });
 
 export const useSendVideo = async (token: string, video: string, caption: string | undefined, chat_id: string) => {
-    await limiter.removeTokens(1)
+    await lmt.removeTokens(1)
     try {
-        const q = await axios( {
+        const q = await axios({
             url: `https://api.telegram.org/bot${token}/sendVideo`,
             method: 'post',
             data: {
@@ -24,7 +25,7 @@ export const useSendVideo = async (token: string, video: string, caption: string
             username: res.result.chat.username ?? undefined,
             ok: res.ok
         }
-    }catch (e) {
+    } catch (e) {
         console.log(Chalk.dim(e))
         return {
             username: undefined,

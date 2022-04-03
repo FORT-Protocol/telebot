@@ -3,6 +3,7 @@
     "version": "0.1.3",
     "description": "A program for telegram bot.",
     "main": "dist/index.js",
+    "type": "module",
     "files": [
         "dist",
         "README.md",
@@ -22,7 +23,8 @@
         "url": "git+ssh://git@github.com/FORT-Protocol/telebot.git"
     },
     "keywords": [
-        "telegram"
+        "telegram",
+        "bot"
     ],
     "author": "FORT Protocol",
     "license": "MIT",
@@ -35,19 +37,19 @@
         "tb": "dist/index.js"
     },
     "dependencies": {
-        "@types/inquirer": "^8.2.1",
-        "@types/node-fetch": "^2.6.1",
         "axios": "^0.26.1",
-        "chalk": "^4.0.0",
+        "chalk": "^5.0.1",
         "commander": "^9.1.0",
         "inquirer": "^8.2.2",
-        "limiter": "^2.1.0",
-        "typescript": "^4.6.3"
+        "limiter": "2.0.1"
     },
     "devDependencies": {
+        "@types/inquirer": "^8.2.1",
+        "@types/node-fetch": "^2.6.1",
         "@types/node": "^17.0.23",
         "@typescript-eslint/eslint-plugin": "^5.17.0",
         "@typescript-eslint/parser": "^5.17.0",
+        "typescript": "^4.6.3",
         "eslint": "^8.12.0",
         "prettier": "2.6.1"
     }

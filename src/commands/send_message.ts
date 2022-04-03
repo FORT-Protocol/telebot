@@ -1,5 +1,5 @@
 import inquirer from 'inquirer'
-import useSendMessage from "../hooks/useSendMessage"
+import useSendMessage from "../hooks/useSendMessage.js"
 import Chalk from "chalk";
 
 export const send_message = async (

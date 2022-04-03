@@ -1,5 +1,5 @@
 import inquirer from 'inquirer'
-import useSendPhoto from "../hooks/useSendPhoto";
+import useSendPhoto from "../hooks/useSendPhoto.js";
 import Chalk from "chalk";
 
 export const send_photo = async (

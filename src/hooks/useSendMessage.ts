@@ -1,6 +1,6 @@
-import {RateLimiter} from "limiter"
 import axios from "axios";
 import Chalk from "chalk";
+import { RateLimiter } from "limiter";
 
 const limiter = new RateLimiter({
     tokensPerInterval: 30,

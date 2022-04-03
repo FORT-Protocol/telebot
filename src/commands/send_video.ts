@@ -1,5 +1,5 @@
 import inquirer from 'inquirer'
-import useSendVideo from "../hooks/useSendVideo";
+import useSendVideo from "../hooks/useSendVideo.js";
 import Chalk from "chalk";
 
 export const send_video = async (
