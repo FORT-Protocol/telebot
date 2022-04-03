@@ -19,10 +19,8 @@ export const useSendMessage = async (
         await limiter.removeTokens(1)
         try {
             axios({
-                url: 'https://www.baidu.com',
+                url: `https://api.telegram.org/bot${token}/sendMessage`,
                 method: 'post',
-                // url: `https://api.telegram.org/bot${token}/sendMessage`,
-                // method: 'post',
                 data: {
                     chat_id: chat_ids[index],
                     text: text,
