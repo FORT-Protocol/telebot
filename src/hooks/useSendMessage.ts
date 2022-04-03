@@ -1,6 +1,6 @@
 import axios from 'axios'
 import Chalk from 'chalk'
-import { RateLimiter } from 'limiter'
+import {RateLimiter} from 'limiter'
 
 const limiter = new RateLimiter({
     tokensPerInterval: 30,
@@ -12,25 +12,22 @@ export const useSendMessage = async (
     text: string,
     chat_ids: string[]
 ) => {
-    let success = 0
     const start = Date.now()
     console.log(`local: Start sending message...`)
-
+    
     for (const index in chat_ids) {
         await limiter.removeTokens(1)
         try {
-            const q = await axios({
-                url: `https://api.telegram.org/bot${token}/sendMessage`,
+            axios({
+                url: 'https://www.baidu.com',
                 method: 'post',
+                // url: `https://api.telegram.org/bot${token}/sendMessage`,
+                // method: 'post',
                 data: {
                     chat_id: chat_ids[index],
                     text: text,
                 },
             })
-            const res = await q.data
-            if (res.ok) {
-                success++
-            }
         } catch (e) {
             console.log(Chalk.dim(e))
         }
@@ -38,16 +35,16 @@ export const useSendMessage = async (
             `local: Sending message to ${chat_ids[index]} ${(
                 ((Number(index) + 1) / chat_ids.length) *
                 100
-            ).toFixed(2)}% (${Number(index) + 1}/${chat_ids.length}), done.`
+            ).toFixed(2)}% (${Number(index) + 1}/${chat_ids.length}), ${
+                ((Number(index) + 1) * 1000 / (Date.now() - start)).toFixed(2)
+            }/s, done.`
         )
     }
-
+    
     const end = Date.now()
     console.log(
         Chalk.green(
-            `\nSuccessfully completed the sending task: (${success}/${
-                chat_ids.length
-            }), ${((end - start) / (1000 * chat_ids.length)).toFixed(
+            `\nSuccessfully completed the sending task. Spend Time ${((end - start)/1000).toFixed(2)}s, ${((chat_ids.length) * 1000 / (end - start)).toFixed(
                 2
             )}/s, done.`
         )

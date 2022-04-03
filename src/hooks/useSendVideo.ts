@@ -1,6 +1,6 @@
 import axios from 'axios'
 import Chalk from 'chalk'
-import { RateLimiter } from 'limiter'
+import {RateLimiter} from 'limiter'
 
 const lmt = new RateLimiter({
     tokensPerInterval: 30,
@@ -13,14 +13,13 @@ export const useSendVideo = async (
     caption: string | undefined,
     chat_ids: string[]
 ) => {
-    let success = 0
     const start = Date.now()
     console.log(`local: Start sending video...`)
-
+    
     for (const index in chat_ids) {
         await lmt.removeTokens(1)
         try {
-            const q = await axios({
+            axios({
                 url: `https://api.telegram.org/bot${token}/sendVideo`,
                 method: 'post',
                 data: {
@@ -29,10 +28,6 @@ export const useSendVideo = async (
                     caption: caption,
                 },
             })
-            const res = await q.data
-            if (res.ok) {
-                success++
-            }
         } catch (e) {
             console.log(Chalk.dim(e))
         }
@@ -40,16 +35,16 @@ export const useSendVideo = async (
             `local: Sending video to ${chat_ids[index]} ${(
                 ((Number(index) + 1) / chat_ids.length) *
                 100
-            ).toFixed(2)}% (${Number(index) + 1}/${chat_ids.length}), done.`
+            ).toFixed(2)}% (${Number(index) + 1}/${chat_ids.length}), ${
+                ((Number(index) + 1) * 1000 / (Date.now() - start)).toFixed(2)
+            }/s, done.`
         )
     }
-
+    
     const end = Date.now()
     console.log(
         Chalk.green(
-            `\nSuccessfully completed the sending task: (${success}/${
-                chat_ids.length
-            }), ${((end - start) / (1000 * chat_ids.length)).toFixed(
+            `\nSuccessfully completed the sending task. Spend Time ${((end - start)/1000).toFixed(2)}s, ${((chat_ids.length) * 1000 / (end - start)).toFixed(
                 2
             )}/s, done.`
         )
