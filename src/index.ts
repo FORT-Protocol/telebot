@@ -3,8 +3,7 @@ import send_message from './commands/send_message.js'
 import send_video from './commands/send_video.js'
 import send_photo from './commands/send_photo.js'
 import send from './commands/send.js'
-import {createCommand} from "commander"
-import Chalk from "chalk"
+import { createCommand } from 'commander'
 
 const telebot = createCommand()
 
@@ -33,15 +32,11 @@ Examples:
 telebot
     .command('send-message <text> [chat_ids...]')
     .alias('message')
-    .description('send message to user')
+    .description('send message')
     .option('-y, --yes', 'confirmed', false)
     .action(async (text: string, chat_ids: string[], options: any) => {
         const token = telebot.getOptionValue('token')
-        if (chat_ids.length > 0) {
-            await send_message(token, text, chat_ids, options.yes)
-        } else {
-            console.log(Chalk.green('Send message over:'), Chalk.red('0 user'))
-        }
+        await send_message(token, text, chat_ids, options.yes)
     })
     .addHelpText(
         'after',
@@ -55,7 +50,7 @@ Examples:
 telebot
     .command('send-video <video> [chat_ids...]')
     .alias('video')
-    .description('send video to chat_id user')
+    .description('send video')
     .option(
         '--caption <caption>',
         'video caption (may also be used when resending videos by file_id), 0-1024 characters after entities parsing'
@@ -63,11 +58,13 @@ telebot
     .option('-y, --yes', 'confirmed', false)
     .action(async (video: string, chat_ids: string[], options: any) => {
         const token = telebot.getOptionValue('token')
-        if (chat_ids.length > 0) {
-            await send_video(token, video, chat_ids, options.caption, options.yes)
-        } else {
-            console.log(Chalk.green('Send video over:'), Chalk.red('0 user'))
-        }
+        await send_video(
+            token,
+            video,
+            chat_ids,
+            options.caption,
+            options.yes
+        )
     })
     .addHelpText(
         'after',
@@ -81,7 +78,7 @@ Examples:
 telebot
     .command('send-photo <photo> [chat_ids...]')
     .alias('photo')
-    .description('send photo to chat_id user')
+    .description('send photo')
     .option(
         '--caption <caption>',
         'photo caption (may also be used when resending photos by file_id), 0-1024 characters after entities parsing'
@@ -89,11 +86,13 @@ telebot
     .option('-y, --yes', 'confirmed', false)
     .action(async (photo: string, chat_ids: string[], options: any) => {
         const token = telebot.getOptionValue('token')
-        if (chat_ids.length > 0) {
-            await send_photo(token, photo, chat_ids, options.caption, options.yes)
-        } else {
-            console.log(Chalk.green('Send photo over:'), Chalk.red('0 user'))
-        }
+        await send_photo(
+            token,
+            photo,
+            chat_ids,
+            options.caption,
+            options.yes
+        )
     })
     .addHelpText(
         'after',

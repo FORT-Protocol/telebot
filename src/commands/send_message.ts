@@ -1,6 +1,5 @@
 import inquirer from 'inquirer'
-import useSendMessage from "../hooks/useSendMessage.js"
-import Chalk from "chalk";
+import useSendMessage from '../hooks/useSendMessage.js'
 
 export const send_message = async (
     token: string | undefined,
@@ -13,14 +12,14 @@ export const send_message = async (
             type: 'input',
             name: 'token',
             message: 'Bot Token:',
-            when: !token
+            when: !token,
         },
         {
             type: 'confirm',
             name: 'confirmed',
             message: 'Is now to send message?',
             default: true,
-            when: !confirmed
+            when: !confirmed,
         },
     ]
     const q = await inquirer.prompt(questions)
@@ -29,25 +28,10 @@ export const send_message = async (
         token = answers.token
     }
     if (confirmed || answers.confirmed) {
-        let success = 0
-        const start = Date.now()
-        console.log(`local: Start sending message...`)
-        for (const index in chat_ids) {
-            await useSendMessage(token!, text, chat_ids[index])
-                .then(({ok, username}) => {
-                    if (ok) {
-                        success++
-                        console.log(`local: Sending message to ${username} ${((Number(index) + 1) / chat_ids.length * 100).toFixed(2)}% (${Number(index) + 1}/${chat_ids.length}), done.`)
-                    } else {
-                        console.log(`local: Sending message to ${username} ${((Number(index) + 1) / chat_ids.length * 100).toFixed(2)}% (${Number(index) + 1}/${chat_ids.length}), done.`)
-                    }
-                })
-        }
-        const end = Date.now()
-        console.log(Chalk.green(`\nSuccessfully completed the sending task: (${success}/${chat_ids.length}), ${((end - start) / (1000 * chat_ids.length)).toFixed(2)}/s, done.`))
-        return
+        await useSendMessage(token!, text, chat_ids)
+    } else {
+        console.log('\nCancel this send task.')
     }
-    console.log(Chalk.red('\nCancel this send task.'))
 }
 
 export default send_message

@@ -41,7 +41,7 @@ telebot send-message 'hello' chat_id1 chat_id2 -y
 send a `photo`
 
 ```shell
-telebot send-photo 'uri' chat_id1 chat_id2 --caption 'hello' -y 
+telebot send-photo 'uri' chat_id1 chat_id2 --caption 'hello' -y
 ```
 
 ## send-video
