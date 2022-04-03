@@ -17,18 +17,15 @@ export const useSendMessage = async (
     
     for (const index in chat_ids) {
         await limiter.removeTokens(1)
-        try {
-            axios({
-                url: `https://api.telegram.org/bot${token}/sendMessage`,
-                method: 'post',
-                data: {
-                    chat_id: chat_ids[index],
-                    text: text,
-                },
-            })
-        } catch (e) {
-            console.log(Chalk.dim(e))
-        }
+        axios({
+            url: `https://api.telegram.org/bot${token}/sendMessage`,
+            method: 'post',
+            data: {
+                chat_id: chat_ids[index],
+                text: text,
+            },
+        }).catch(()=>{
+        })
         console.log(
             `local: Sending message to ${chat_ids[index]} ${(
                 ((Number(index) + 1) / chat_ids.length) *

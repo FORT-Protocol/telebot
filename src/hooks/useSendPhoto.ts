@@ -18,19 +18,16 @@ export const useSendPhoto = async (
     
     for (const index in chat_ids) {
         await limiter.removeTokens(1)
-        try {
-            axios({
-                url: `https://api.telegram.org/bot${token}/sendPhoto`,
-                method: 'post',
-                data: {
-                    chat_id: chat_ids[index],
-                    photo: photo,
-                    caption: caption,
-                },
-            })
-        } catch (e) {
-            console.log(Chalk.dim(e))
-        }
+        axios({
+            url: `https://api.telegram.org/bot${token}/sendPhoto`,
+            method: 'post',
+            data: {
+                chat_id: chat_ids[index],
+                photo: photo,
+                caption: caption,
+            },
+        }).catch(()=>{
+        })
         console.log(
             `local: Sending photo to ${chat_ids[index]} ${(
                 ((Number(index) + 1) / chat_ids.length) *

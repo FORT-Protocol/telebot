@@ -18,19 +18,16 @@ export const useSendVideo = async (
     
     for (const index in chat_ids) {
         await lmt.removeTokens(1)
-        try {
-            axios({
-                url: `https://api.telegram.org/bot${token}/sendVideo`,
-                method: 'post',
-                data: {
-                    chat_id: chat_ids[index],
-                    video: video,
-                    caption: caption,
-                },
-            })
-        } catch (e) {
-            console.log(Chalk.dim(e))
-        }
+        axios({
+            url: `https://api.telegram.org/bot${token}/sendVideo`,
+            method: 'post',
+            data: {
+                chat_id: chat_ids[index],
+                video: video,
+                caption: caption,
+            },
+        }).catch(()=>{
+        })
         console.log(
             `local: Sending video to ${chat_ids[index]} ${(
                 ((Number(index) + 1) / chat_ids.length) *
