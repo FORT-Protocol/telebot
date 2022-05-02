@@ -9,7 +9,7 @@ const telebot = createCommand()
 
 telebot
     .name('telebot')
-    .version('0.1.7')
+    .version('0.1.9')
     .option('-T, --token [token]', 'telegram bot token')
 
 telebot
