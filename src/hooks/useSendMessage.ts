@@ -22,7 +22,7 @@ export const useSendMessage = async (
             url: `https://api.telegram.org/bot${token}/sendMessage`,
             method: 'post',
             data: {
-                chat_id: chat_ids[index],
+                chat_id: chat_ids[index].replace(/\"/g, "").replace(/\'/g, ""),
                 text: text,
             },
             proxy: proxyConfig
