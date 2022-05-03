@@ -2,6 +2,7 @@ import inquirer from 'inquirer'
 import useSendMessage from '../hooks/useSendMessage.js'
 import useSendPhoto from '../hooks/useSendPhoto.js'
 import useSendVideo from '../hooks/useSendVideo.js'
+import { useGetMe } from '../hooks/useGetMe.js'
 
 export const send = async (token: string | undefined, confirmed: boolean) => {
     const questions = [
@@ -83,7 +84,11 @@ export const send = async (token: string | undefined, confirmed: boolean) => {
     }
     const chat_ids = answers.chat_ids.trim().split(/\s+/)
     if (confirmed || answers.confirmed) {
-        console.log(`token:${token}`)
+        console.log(`token: ${token}`)
+        const res = await useGetMe(token!)
+        if (!res) {
+            return
+        }
         switch (answers.method) {
             case 'Message':
                 await useSendMessage(token!, answers.text, chat_ids)

@@ -1,5 +1,6 @@
 import inquirer from 'inquirer'
 import useSendPhoto from '../hooks/useSendPhoto.js'
+import { useGetMe } from '../hooks/useGetMe.js'
 
 export const send_photo = async (
     token: string | undefined,
@@ -27,6 +28,10 @@ export const send_photo = async (
     const answers = await q
     if (!token) {
         token = answers.token
+    }
+    const res = await useGetMe(token!)
+    if (!res) {
+        return
     }
     if (confirmed || answers.confirmed) {
         await useSendPhoto(token!, photo, caption, chat_ids)

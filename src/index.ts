@@ -4,12 +4,13 @@ import send_video from './commands/send_video.js'
 import send_photo from './commands/send_photo.js'
 import send from './commands/send.js'
 import { createCommand } from 'commander'
+import { useGetMe } from './hooks/useGetMe.js'
 
 const telebot = createCommand()
 
 telebot
     .name('telebot')
-    .version('0.1.9')
+    .version('0.2.0')
     .option('-T, --token [token]', 'telegram bot token')
 
 telebot
@@ -24,14 +25,12 @@ telebot
         'after',
         `
 Examples:
-  $ tb send
   $ telebot send
   `
     )
 
 telebot
-    .command('send-message <text> [chat_ids...]')
-    .alias('message')
+    .command('sendmessage <text> [chat_ids...]')
     .description('send message')
     .option('-y, --yes', 'confirmed', false)
     .action(async (text: string, chat_ids: string[], options: any) => {
@@ -42,14 +41,12 @@ telebot
         'after',
         `
 Examples:
-  $ tb message 'hello' chat_id1 chat_id2
-  $ telebot send-message 'hello' chat_id1 chat_id2
+  $ telebot sendmessage 'hello' chat_id1 chat_id2
   `
     )
 
 telebot
-    .command('send-video <video> [chat_ids...]')
-    .alias('video')
+    .command('sendvideo <video> [chat_ids...]')
     .description('send video')
     .option(
         '--caption <caption>',
@@ -58,26 +55,18 @@ telebot
     .option('-y, --yes', 'confirmed', false)
     .action(async (video: string, chat_ids: string[], options: any) => {
         const token = telebot.getOptionValue('token')
-        await send_video(
-            token,
-            video,
-            chat_ids,
-            options.caption,
-            options.yes
-        )
+        await send_video(token, video, chat_ids, options.caption, options.yes)
     })
     .addHelpText(
         'after',
         `
 Examples:
-  $ tb video 'uri' chat_id1 chat_id2 --caption 'hello'
-  $ telebot send-video 'uri' chat_id1 chat_id2 --caption 'hello'
+  $ telebot sendvideo 'uri' chat_id1 chat_id2 --caption 'hello'
   `
     )
 
 telebot
-    .command('send-photo <photo> [chat_ids...]')
-    .alias('photo')
+    .command('sendphoto <photo> [chat_ids...]')
     .description('send photo')
     .option(
         '--caption <caption>',
@@ -86,20 +75,28 @@ telebot
     .option('-y, --yes', 'confirmed', false)
     .action(async (photo: string, chat_ids: string[], options: any) => {
         const token = telebot.getOptionValue('token')
-        await send_photo(
-            token,
-            photo,
-            chat_ids,
-            options.caption,
-            options.yes
-        )
+        await send_photo(token, photo, chat_ids, options.caption, options.yes)
     })
     .addHelpText(
         'after',
         `
 Examples:
-  $ tb photo 'uri' chat_id1 chat_id2 --caption 'hello'
   $ telebot send-photo 'uri' chat_id1 chat_id2 --caption 'hello'
+  `
+    )
+
+telebot
+    .command('getme')
+    .description('easy send via bot')
+    .action(async () => {
+        const token = telebot.getOptionValue('token')
+        await useGetMe(token)
+    })
+    .addHelpText(
+        'after',
+        `
+Examples:
+  $ telebot getme
   `
     )
 

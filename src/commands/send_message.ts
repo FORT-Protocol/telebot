@@ -1,5 +1,6 @@
 import inquirer from 'inquirer'
 import useSendMessage from '../hooks/useSendMessage.js'
+import { useGetMe } from '../hooks/useGetMe.js'
 
 export const send_message = async (
     token: string | undefined,
@@ -26,6 +27,10 @@ export const send_message = async (
     const answers = await q
     if (token === undefined) {
         token = answers.token
+    }
+    const res = await useGetMe(token!)
+    if (!res) {
+        return
     }
     if (confirmed || answers.confirmed) {
         await useSendMessage(token!, text, chat_ids)

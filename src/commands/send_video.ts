@@ -1,5 +1,6 @@
 import inquirer from 'inquirer'
 import useSendVideo from '../hooks/useSendVideo.js'
+import { useGetMe } from '../hooks/useGetMe.js'
 
 export const send_video = async (
     token: string | undefined,
@@ -27,6 +28,10 @@ export const send_video = async (
     const answers = await q
     if (!token) {
         token = answers.token
+    }
+    const res = await useGetMe(token!)
+    if (!res) {
+        return
     }
     if (confirmed || answers.confirmed) {
         await useSendVideo(token!, video, caption, chat_ids)
